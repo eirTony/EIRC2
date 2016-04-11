@@ -183,6 +183,7 @@ bool BasicKeyManager::load(const KeyIdPairList & list)
 
 
 #ifdef BUILD_BASICKEYMANAGERINSTANCE
+#ifdef BUILD_BASICKEYMANAGERINSTANCE
 DEFINE_BASICSINGLETON(BasicKeyManagerInstance)
 BasicKeyManagerInstance::BasicKeyManagerInstance(void) {;}
 BasicKeyManagerInstance * gpBasicKeyManagerInstance

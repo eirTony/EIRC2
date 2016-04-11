@@ -57,6 +57,9 @@ private:
     void setupConnections(void);
     ExecutableSupport * mother(void);
 
+private:
+    void setupConnections(void);
+
 signals:
     void constructing(void);
     void executing(void);
