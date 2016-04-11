@@ -1,7 +1,8 @@
 #ifndef BASICSINGLETON_H
 #define BASICSINGLETON_H
 
-/*! @file Singleton.h Macros for Singleton classes
+/*! @file BasicSingleton.h Macros for Basic Singleton classes
+  * @todo Non-void c'tor
   *
   * Usage:
   *
@@ -27,9 +28,6 @@
   * @endcode
   *
   */
-
-// TODO: Non-void c'tor()
-
 #define DECLARE_BASICSINGLETON(CLASS) \
     protected: \
         CLASS(void); \
@@ -46,6 +44,5 @@
     { if ( ! smpClass) smpClass = new CLASS; return smpClass; } \
     CLASS * CLASS::pointer(void) { return instance(); } \
     CLASS & CLASS::reference(void) { return *instance(); } \
-
 
 #endif // BASICSINGLETON_H

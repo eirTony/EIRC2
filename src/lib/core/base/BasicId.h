@@ -37,6 +37,7 @@ public:
     BasicId parents(void) const;
     int size(void) const;
     bool isNull(void) const;
+    BasicNameList  toList(void) const;
     bool operator <  (const BasicId & rhs) const;
     bool operator == (const BasicId & rhs) const;
     BasicId & operator += (const BasicName name);
@@ -68,7 +69,7 @@ Q_DECLARE_TYPEINFO(BasicId, Q_PRIMITIVE_TYPE);
 
 typedef BasicId::VariantMap BasicIdVariantMap;
 
-#ifdef BUILD_TEST
+#ifdef BUILD_TEST                       ///////// TEST
 #include "TestObject.h"
 
 class BasicIdTest : public TestObject
@@ -96,6 +97,6 @@ private:
     BasicId stringId = BasicId(idString);
     BasicId charsId = BasicId("that/was/a/test");
 };
-#endif
+#endif                                  //\\\\\\\ test
 
 #endif // BASICID_H

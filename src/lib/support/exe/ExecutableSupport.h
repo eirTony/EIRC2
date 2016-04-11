@@ -45,6 +45,9 @@ protected:
                                QObject * parent=0);
     virtual bool event(QEvent * event);
 
+private:
+    void setupConnections(void);
+
 signals:
     void constructing(void);
     void executing(void);

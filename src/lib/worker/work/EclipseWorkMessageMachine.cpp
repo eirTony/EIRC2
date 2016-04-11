@@ -1,5 +1,5 @@
 #include "EclipseWorkMessageMachine.h"
-#if 1
+#if 0
 #include <state/EclipseStateMachine.h>
 #include <msg/EclipseMessageQueue.h>
 

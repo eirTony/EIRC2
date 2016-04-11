@@ -6,6 +6,7 @@
 #include <base/_internal/ModuleManager.h>
 #include <base/TestObject.h>
 
+// protected
 ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
                                      QObject * parent)
     : ModuleInfo(parent)
@@ -26,6 +27,21 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
     default:
         break;
     }
+
+    setupConnections();
+    TRACE("emit constructing()","");
+    emit constructing();
+
+    // Process Command Line
+    mRawApplicationArguments = mpCoreApplication->arguments();
+    QString exeArg = mRawApplicationArguments.takeFirst();
+    mExeFileInfo.setFile(exeArg);
+}
+
+// private
+void ExecutableSupport::setupConnections(void)
+{
+    TODO("CONNECT & EMIT diagnostic macros");
     TODO("move ModuleManager out of _internal");
     WARNNOT(connect(this, SIGNAL(constructing()),
                     ModuleManager::pointer(), SLOT(onConstruct())));
@@ -46,15 +62,9 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
     WARNNOT(connect(this, SIGNAL(quiting()),
                     ModuleManager::pointer(), SLOT(onQuit())));
 
-    TRACE("emit constructing()","");
-    emit constructing();
-
-    // Process Command Line
-    mRawApplicationArguments = mpCoreApplication->arguments();
-    QString exeArg = mRawApplicationArguments.takeFirst();
-    mExeFileInfo.setFile(exeArg);
 }
 
+// protected
 bool ExecutableSupport::event(QEvent * event)
 {
     NOUSE(event);

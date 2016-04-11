@@ -1,5 +1,5 @@
-#ifndef VAR_GLOBAL_H
-#define VAR_GLOBAL_H
+#ifndef EMPTY_GLOBAL_H
+#define EMPTY_GLOBAL_H
 
 #include <QtCore/qglobal.h>
 
@@ -9,4 +9,4 @@
 #  define VARSHARED_EXPORT Q_DECL_IMPORT
 #endif
 
-#endif // VAR_GLOBAL_H
+#endif // EMPTY_GLOBAL_H

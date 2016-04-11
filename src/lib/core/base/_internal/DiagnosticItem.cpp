@@ -49,11 +49,11 @@ QString DiagnosticItem::createMessage(const QString & format,
 {
     QString message = BaseLib::formatMessage(format, varList);
     QFileInfo fi(cmFileName);
-    return QString("%1 %2 %3[%4], %5")
+    return QString("%1 %2 %3:%4, %5")
             .arg(QTime::currentTime().toString("hh:mm:ss.zzz"))
             .arg(message, -64)
             .arg(fi.completeBaseName(), 16)
-            .arg(cmFileLine, 3)
+            .arg(cmFileLine, -3)
             .arg(cmFunction);
 }
 
