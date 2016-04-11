@@ -1,0 +1,8 @@
+* Branch Notes for 'develop' main branch
+
+= 2015-07-03 v2.03A aho
+-- Cleanup compile/link merge issues
+
+= 2015-05-27 v2.03A aho
+-- develop-BranchNotes.txt created
+-- build1001 was released some time ago

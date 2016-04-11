@@ -1,0 +1,8 @@
+* Branch Notes for 'current' main branch
+
+= 2105-07-24 aho
+-- current-BranchNotes.txt created
+-- v2.02_F0 was released some time ago
+
+= 2015-10-17 aho
+-- promoted to v2.03C with Qt5 build issues fixed

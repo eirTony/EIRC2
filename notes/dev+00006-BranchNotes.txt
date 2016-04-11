@@ -1,0 +1,8 @@
+* Branch Notes for 'dev+00006' development branch: New BjutLib
+
+= 2015-06-12 v2.03A aho
+-- New BjUtLib
+-- Split BasicJournal into BjUt
+-- Start BasicUnitTest
+
+

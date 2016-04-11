@@ -1,0 +1,5 @@
+* Branch Notes for 'dev+IB00009' development branch: Diagnostic Macros for QtDebug
+
+=2015-10-15 v2.03A aho
+-- started branch
+

@@ -1,0 +1,10 @@
+* BranchNotes for 'dev150902aho' development branch
+
+= 2015-09-06 aho
+-- Got basic plumbing connected for BasicJournal
+-- Next: Init-time and Config-time skeleton via ExectuableSupport
+-- Consider: BNULPTR0, BxxxIF0, BxxxNOT0 macros with self-defined messages
+-- Todo: Exercise supported macros
+-- Todo: Exercise supported txtfile formats
+-- After Merge&Branch: Basic plumbing for BasicUnitTest, start unit test framework in eirBase and above
+

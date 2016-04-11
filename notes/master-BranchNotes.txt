@@ -1,0 +1,5 @@
+* Branch Notes for 'master' main branch
+
+= 2015-05-27 v2.03A aho
+--master-BranchNotes.txt created
+--v2.02-Final0 was released some time ago

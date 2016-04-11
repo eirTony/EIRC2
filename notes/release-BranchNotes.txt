@@ -1,0 +1,8 @@
+* BranchNotes for the 'release' main branch
+
+= 2015-05-27
+-- release-BranchNotes.txt created
+-- v2.02-Alpha0 was released some time ago
+
+= 2015-10-17 aho
+-- promoted to v2.03-Alpha0 for build fixes needed by Qt5
