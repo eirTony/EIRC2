@@ -1,6 +1,6 @@
 #include "VarLib.h"
 
 
-VarLib::VarLib(void)
+VarLib::VarLib()
 {
 }

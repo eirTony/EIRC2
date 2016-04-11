@@ -101,10 +101,6 @@ void BasicIdTest::set(void)
     QCOMPARE(id.toString(), QString("this/aint/a/test/oops"));
     id.set(7, "seven");
     QCOMPARE(id.toString(), QString("this/aint/a/test/oops"));
-
-    BasicId keyId("Super/0/Sub/0");
-    QCOMPARE(keyId.at(1), BasicName());
-    QCOMPARE(keyId.at(1), BasicName(""));
 }
 
 void BasicIdTest::white(void)

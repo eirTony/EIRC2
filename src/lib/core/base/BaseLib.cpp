@@ -90,7 +90,7 @@ void BaseLib::doExecute(void)
 void BaseLib::doInitialize(void)
 {
     TRACE("We're %1", "there!");
-#ifdef BUILD_TEST
+#ifdef BUILD_TESTS
     BasicIdTest bit;
     BasicKeyTest bkt;
     BasicKeyManagerTest bkmt;
