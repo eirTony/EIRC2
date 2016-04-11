@@ -28,7 +28,7 @@ SOURCES += LogLib.cpp \
 
 HEADERS += LogLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     LogItem.h \
     LogFork.h \
     Logger.h \

@@ -22,7 +22,9 @@ INCLUDEPATH *= ../../../lib/core
 INCLUDEPATH *= ../../../lib/support
 INCLUDEPATH *= ../../../lib/worker
 INCLUDEPATH *= ../../../lib/third
+INCLUDEPATH *= ../../../common
 INCLUDEPATH *= ../../..
+
 DEFINES *= QT_USE_QSTRINGBUILDER
 DEFINES *= BUILD_TEST
 QMAKE_CXXFLAGS *= -std=c++11

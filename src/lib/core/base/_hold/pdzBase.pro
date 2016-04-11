@@ -35,7 +35,7 @@ HEADERS += pdzBase.h\
     VersionInfo.h \
     LibraryInfo.h \
     ../../../BranchVersion.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     BasicSingleton.h \
     BasicId.h \
     BasicKey.h \

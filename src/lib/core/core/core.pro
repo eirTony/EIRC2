@@ -19,7 +19,7 @@ SOURCES += CoreLib.cpp
 
 HEADERS += CoreLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     core_global.h \
     Singleton.h \
     @hold/Singleton.h

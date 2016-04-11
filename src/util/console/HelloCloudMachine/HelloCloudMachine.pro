@@ -32,7 +32,7 @@ SOURCES += main.cpp \
     HelloCloudMachine.cpp
 
 HEADERS += \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     Version.h \
     HelloCloudMachine.h
 

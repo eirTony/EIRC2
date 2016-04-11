@@ -36,7 +36,7 @@ HEADERS += BaseLib.h\
     ModuleInfo.h \
     VersionInfo.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     ../type/CProperty.h \
     BasicName.h \
     BasicNameMap.h \

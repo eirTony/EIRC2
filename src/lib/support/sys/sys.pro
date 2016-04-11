@@ -17,7 +17,7 @@ SOURCES += SysLib.cpp
 HEADERS += SysLib.h \
     sys_global.h \
     Version.h \
-    ../../../CommonVersion.h
+    ../../../Common/CommonVersion.h
 
 unix {
     target.path = /usr/lib

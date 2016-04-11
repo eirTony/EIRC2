@@ -2,7 +2,9 @@
  */
 #include "BjutLib.h"
 #include "Version.h"
+#include <BranchVersion.h>
 #include <CommonVersion.h>
+
 
 #include <QtDebug>
 
