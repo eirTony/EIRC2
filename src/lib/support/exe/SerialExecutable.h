@@ -6,7 +6,8 @@
 
 class BaseSerialStream;
 
-class EXESHARED_EXPORT SerialExecutable : public ExecutableSupport
+class EXESHARED_EXPORT SerialExecutable
+        : public ExecutableSupport
 {
     Q_OBJECT
 public:
@@ -16,15 +17,10 @@ public:
     bool writeLine(const QString & line);
     bool writeError(const QString & error);
 
-signals:
-
-public slots:
-    void initialize(void);
-    void setup(void);
-    void start(void);
-
 protected:
-    SerialExecutable(BaseSerialStream * textStream=0);
+    explicit SerialExecutable(BaseSerialStream * serialStream,
+                              const BasicId::VariantMap
+                                    initialization);
 
 private:
     BaseSerialStream * mpSerialStream = 0;

@@ -65,9 +65,6 @@ void BasicKey::set(const Part part,
 #ifdef BUILD_TEST                       ///////// TEST
 void BasicKeyTest::setBasicId(void)
 {
-    QCOMPARE(keyS(),    keyS0());
-    QCOMPARE(keyS0s(),  keyS0s());
-
     QCOMPARE(noKey.isNull(), true);
     QCOMPARE(noKey.isZero(), true);
     QCOMPARE(keyNoId.isNull(), true);
@@ -81,27 +78,26 @@ void BasicKeyTest::setBasicId(void)
 
     QCOMPARE(keyS0.get(BasicKey::UpperGroup)(),
              current.get(BasicKey::UpperGroup)());
-    QCOMPARE(keyS0.get(BasicKey::UpperValue)(),
-             current.get(BasicKey::UpperValue)());
+    QCOMPARE(keyS.get(BasicKey::UpperValue)(), (quint64)(0));
     QCOMPARE(keyS0.get(BasicKey::LowerGroup)(), (quint64)(0));
     QCOMPARE(keyS0.get(BasicKey::LowerValue)(), (quint64)(0));
 
     QCOMPARE(keyS0s.get(BasicKey::UpperGroup)(),
              current.get(BasicKey::UpperGroup)());
-    QCOMPARE(keyS0s.get(BasicKey::UpperValue)(),
-             current.get(BasicKey::UpperValue)());
+    QCOMPARE(keyS0s.get(BasicKey::UpperValue)(), (quint64)(0));
     QCOMPARE(keyS0s.get(BasicKey::LowerGroup)(),
              current.get(BasicKey::LowerGroup)());
     QCOMPARE(keyS0s.get(BasicKey::LowerValue)(), (quint64)(0));
 
     QCOMPARE(keyS0s0.get(BasicKey::UpperGroup)(),
              current.get(BasicKey::UpperGroup)());
-    QCOMPARE(keyS0s0.get(BasicKey::UpperValue)(),
-             current.get(BasicKey::UpperValue)());
+    QCOMPARE(keyS0s0.get(BasicKey::UpperValue)(), (quint64)(0));
     QCOMPARE(keyS0s0.get(BasicKey::LowerGroup)(),
              current.get(BasicKey::LowerGroup)());
-    QCOMPARE(keyS0s0.get(BasicKey::LowerValue)(),
-             current.get(BasicKey::LowerValue)());
+    QCOMPARE(keyS0s0.get(BasicKey::LowerValue)(), (quint64)(0));
+
+    QCOMPARE(keyS(),    keyS0());
+    QCOMPARE(keyS0s(),  keyS0s0());
 }
 #endif                                  //\\\\\\\ test
 
@@ -116,8 +112,7 @@ void BasicKey::set(const BasicId & id,
     while ( ! bnl.isEmpty())
     {
         BasicName name = bnl.takeFirst();
-        set(Part(++iPart),
-            ("0"==name) ? 0 : newestKey);
+        set(Part(++iPart), name.isEmpty() ? 0 : newestKey);
     }
     TRACE("BK::set(%1(%2), 0x%3)=%4", id(), id.size(),
           QString::number(other(), 16).toUpper(),

@@ -7,29 +7,24 @@
 #include <base/BasicName.h>
 #include <base/BasicId.h>
 
+#include "ExecutableInitialization.h"
+
 class StandardStream;
 
-class EXESHARED_EXPORT ConsoleApplication : public SerialExecutable
+class EXESHARED_EXPORT ConsoleApplication
+        : public SerialExecutable
 {
     Q_OBJECT
 public:
-    explicit ConsoleApplication(void);
+    explicit ConsoleApplication(const ExecutableInitialization &
+                                            initialization
+                                            =ExecutableInitialization());
     ~ConsoleApplication();
 
 signals:
     void initialized(void);
     void setuped(void);
     void started(void);
-
-public slots:
-    void initialize(void);
-    void setup(void);
-    void start(void);
-
-protected:
-    virtual void doInitialize(void) = 0;
-    virtual void doSetup(void) = 0;
-    virtual void doStart(void) = 0;
 
 private:
     StandardStream * mpStream = 0;

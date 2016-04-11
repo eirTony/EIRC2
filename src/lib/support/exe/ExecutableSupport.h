@@ -4,11 +4,7 @@
 
 #include <QObject>
 #include <base/ModuleInfo.h>
-
-#include <QFileInfo>
-#include <QStringList>
-
-#include <cfg/Configuration.h>
+#include "ExecutableInterface.h"
 
 #include <QFileInfo>
 #include <QStringList>
@@ -16,9 +12,12 @@ class QApplication;
 class QGuiApplication;
 class QCoreApplication;
 
+#include <cfg/Configuration.h>
+#include <res/Result.h>
+#include <state/EclipseStateMachine.h>
 
 class EXESHARED_EXPORT ExecutableSupport
-        : public ModuleInfo
+        : public ModuleInfo, protected ExecutableInterface
 {
     Q_OBJECT
 
@@ -37,13 +36,26 @@ public:
     QCoreApplication * app(void) const;
     const QFileInfo & exeFileInfo(void) const;
     QString appName(void) const;
-    BasicName::VariantMap initialization(void) const;
-    Configuration configuration(void) const;
+
+public slots:
+
+protected slots:
+    void machineCommand(EclipseStateMachine::Command cmd);
 
 protected:
     explicit ExecutableSupport(const ApplicationClass appClass,
-                               QObject * parent=0);
+                                 const BasicId::VariantMap &
+                                    initialization,
+                                 ExecutableSupport * parent=0);
+    void setMother(const ExecutableSupport * pMother);
     virtual bool event(QEvent * event);
+    void initialize(void);
+
+    EclipseStateMachine * mpMachine = 0;
+
+private:
+    void setupConnections(void);
+    ExecutableSupport * mother(void);
 
 private:
     void setupConnections(void);
@@ -58,11 +70,6 @@ signals:
     void stoping(void);
     void quiting(void);
 
-protected slots:
-    void initialize(void);
-    void setup(void);
-    void start(void);
-    void quit(void);
 
 private:
     ApplicationClass mApplicationClass = nullApplicationClass;
@@ -71,8 +78,7 @@ private:
     QCoreApplication * mpCoreApplication = 0;
     QStringList mRawApplicationArguments;
     QFileInfo mExeFileInfo;
-    Configuration mConfiguration;
-    BasicName::VariantMap mInitialization;
+    const ExecutableSupport * mpMotherExeObject = 0;
 };
 
 #endif // EXECUTABLESUPPORT_H

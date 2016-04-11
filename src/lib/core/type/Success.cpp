@@ -32,6 +32,17 @@ bool Success::expect(const bool isTrue)
     return is();
 }
 
+void Success::test(const bool isTrue)
+{
+    if ( ! isTrue) mIsInitialized = true, mSuccess = false;
+}
+
+Success Success::tested(void)
+{
+    if ( ! mIsInitialized) mIsInitialized = mSuccess = true;
+    return *this;
+}
+
 Success::operator bool (void) const
 {
     return is();

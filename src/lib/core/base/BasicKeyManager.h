@@ -2,6 +2,9 @@
 #define BASICKEYMANAGER_H
 #include "BaseLib.h"
 
+#include <QList>
+#include <QPair>
+
 class QDomElement;
 
 #include "BasicId.h"
@@ -11,6 +14,10 @@ class QDomElement;
 
 class BASESHARED_EXPORT BasicKeyManager
 {
+public:
+    typedef QPair<BasicKey, BasicId> KeyIdPair;
+    typedef QList<KeyIdPair> KeyIdPairList;
+
 public:
     BasicKeyManager(void);
     void clear(void);
@@ -25,6 +32,7 @@ public:
     BasicKey add(const BasicId & id,
                  const BasicKey base=0);
 
+    bool load(const KeyIdPairList & list);
     bool load(const QDomElement & de);
     QDomElement & save(void);
 

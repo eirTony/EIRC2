@@ -84,10 +84,10 @@ VersionInfo ModuleInfo::version(void) const
 }
 
 void ModuleInfo::doConstruct(void) {TRACE("in ModuleInfo::%1() for %2", "doConstruct", mName);}
-void ModuleInfo::doExecute(void) {TRACE("in ModuleInfo::%1 for %2", "doExecute", mName);}
-void ModuleInfo::doTest(void) {TRACE("in ModuleInfo::%1 for %2", "doTest", mName);}
-void ModuleInfo::doInitialize(void) {TRACE("in ModuleInfo::%1 for %2", "doInitialize", mName);}
-void ModuleInfo::doConfigure(void) {TRACE("in ModuleInfo::%1 for %2", "doConfigure", mName);}
-void ModuleInfo::doStart(void) {TRACE("in ModuleInfo::%1 for %2", "doStart", mName);}
-void ModuleInfo::doStop(void) {TRACE("in ModuleInfo::%1 for %2", "doStop", mName);}
-void ModuleInfo::doQuit(void) {TRACE("in ModuleInfo::%1 for %2", "doQuit", mName);}
+void ModuleInfo::doExecute(void) {TRACE("in ModuleInfo::%1() for %2", "doExecute", mName);}
+void ModuleInfo::doTest(void) {TRACE("in ModuleInfo::%1() for %2", "doTest", mName);}
+void ModuleInfo::doInitialize(void) {TRACE("in ModuleInfo::%1() for %2", "doInitialize", mName);}
+void ModuleInfo::doConfigure(void) {TRACE("in ModuleInfo::%1() for %2", "doConfigure", mName);}
+void ModuleInfo::doStart(void) {TRACE("in ModuleInfo::%1() for %2", "doStart", mName);}
+void ModuleInfo::doStop(void) {TRACE("in ModuleInfo::%1() for %2", "doStop", mName);}
+void ModuleInfo::doQuit(void) {TRACE("in ModuleInfo::%1() for %2", "doQuit", mName);}

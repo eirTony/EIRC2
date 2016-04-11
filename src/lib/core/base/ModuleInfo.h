@@ -28,6 +28,9 @@ public:
     void setVersion(void);
     QString name(void) const;
     VersionInfo version(void) const;
+    void initialize(void);
+    void gsye(void);
+    void quit(void);
 
 public slots: // virtual
     virtual void doConstruct(void);

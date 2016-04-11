@@ -5,17 +5,26 @@
 
 #include <base/_internal/ModuleManager.h>
 #include <base/TestObject.h>
+#include <state/EclipseStateMachine.h>
 
 // protected
 ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
-                                     QObject * parent)
+                                     const BasicId::VariantMap & initialization,
+                                     ExecutableSupport * parent)
     : ModuleInfo(parent)
+    , ExecutableInterface(initialization)
     , mApplicationClass(appClass)
+//    , mpMachine(new EclipseStateMachine(this))
 {
+    setMother(parent);
+    mpMachine = new EclipseStateMachine(this);
+
     switch (mApplicationClass)
     {
-    case Widget:    mpApplication = (QApplication *)qApp;       // fall thru
-    case Gui:       mpGuiApplication = (QGuiApplication *)qApp; // fall thru
+    case Widget:    mpApplication = (QApplication *)qApp;
+                    // fall thru
+    case Gui:       mpGuiApplication = (QGuiApplication *)qApp;
+                    // fall thru
     case Serial:
     case Headless:  mpCoreApplication = qApp;
         mRawApplicationArguments = mpCoreApplication->arguments();
@@ -24,25 +33,40 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
             QObject::setParent(mpCoreApplication);
         break;
 
-    default:
-        break;
+    case nullApplicationClass:  /* nada */  break;
+    case sizeApplicationClass:  /* nada */  break;
     }
 
-    setupConnections();
+//    mpMotherExeObject->doConstruct();
     TRACE("emit constructing()","");
     emit constructing();
 
-    // Process Command Line
-    mRawApplicationArguments = mpCoreApplication->arguments();
-    QString exeArg = mRawApplicationArguments.takeFirst();
-    mExeFileInfo.setFile(exeArg);
+
+
 }
+
+// protected
+void ExecutableSupport::setMother(const ExecutableSupport * pMother)
+{
+    const ExecutableSupport * pXSup
+            = qobject_cast<const ExecutableSupport *>(pMother);
+    if (pXSup) mpMotherExeObject = pXSup;
+}
+
 
 // private
 void ExecutableSupport::setupConnections(void)
 {
     TODO("CONNECT & EMIT diagnostic macros");
     TODO("move ModuleManager out of _internal");
+    connect(this, SIGNAL(quiting()),
+            mpCoreApplication, SLOT(quit()));
+#if 0
+    WARNNOT(connect(this, SIGNAL(constructing()),
+                    this, SLOT(initialize())));
+    WARNNOT(connect((this, SIGNAL(initializing()),
+                     this, SLOT(setup()))));
+
     WARNNOT(connect(this, SIGNAL(constructing()),
                     ModuleManager::pointer(), SLOT(onConstruct())));
     WARNNOT(connect(this, SIGNAL(executing()),
@@ -51,8 +75,6 @@ void ExecutableSupport::setupConnections(void)
                     ModuleManager::pointer(), SLOT(onTest())));
     WARNNOT(connect(this, SIGNAL(initializing()),
                     ModuleManager::pointer(), SLOT(onInitialize())));
-    WARNNOT(connect(this, SIGNAL(testing()),
-                    ModuleManager::pointer(), SLOT(onTest())));
     WARNNOT(connect(this, SIGNAL(configuring()),
                     ModuleManager::pointer(), SLOT(onConfigure())));
     WARNNOT(connect(this, SIGNAL(starting()),
@@ -61,7 +83,7 @@ void ExecutableSupport::setupConnections(void)
                     ModuleManager::pointer(), SLOT(onStop())));
     WARNNOT(connect(this, SIGNAL(quiting()),
                     ModuleManager::pointer(), SLOT(onQuit())));
-
+#endif
 }
 
 // protected
@@ -93,33 +115,33 @@ QString ExecutableSupport::appName(void) const
     return app()->applicationName();
 }
 
-BasicName::VariantMap ExecutableSupport::initialization(void) const
+void ExecutableSupport::machineCommand(EclipseStateMachine::Command cmd)
 {
-    return mInitialization;
+    mpMachine->command(cmd);
 }
 
-Configuration ExecutableSupport::configuration(void) const
-{
-    return mConfiguration;
-}
-
+/*
 void ExecutableSupport::initialize(void)
 {
+    WARNNOT(connect(this, SIGNAL(initializing()),
+                    this, SLOT(gyse())));
+
+    setupConnections();
+
+    // Process Command Line
+    mRawApplicationArguments = mpCoreApplication->arguments();
+    QString exeArg = mRawApplicationArguments.takeFirst();
+    mExeFileInfo.setFile(exeArg);
+
     TRACE("emit initializing()", "");
     TODO("Why TRACE macro ...args not working?");
+    mpMotherExeObject->doInitialize();
     emit initializing();
-    connect(this, SIGNAL(quiting()),
-            mpCoreApplication, SLOT(quit()));
-    // TestObject::execAll();
 }
 
-void ExecutableSupport::setup(void)
+void ExecutableSupport::gsye(void)
 {
-    // do stuff
-}
-
-void ExecutableSupport::start(void)
-{
+    //mpMachine->start();
     TRACE("emit starting()", "");
     TODO("emit starting(void);");
     // do stuff
@@ -131,3 +153,4 @@ void ExecutableSupport::quit(void)
     TODO("Why TRACE macro ...args not working?");
     emit quiting();
 }
+*/

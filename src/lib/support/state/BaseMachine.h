@@ -33,9 +33,23 @@ public:
     typedef QList<SourceTargetStatePair> SourceTargetStateList;
     typedef QList<SignalTransitionPair> SignalTransitionList;
 
+    enum Command
+    {
+        nullCommand = 0,
+        Initialize,
+        Start,
+        Stop,
+        Terminate,
+        sizeCommand
+    };
+
 public:
     explicit BaseMachine(QObject * parent=0);
+    void command(const Command cmd);
+
+    BasicKeyManager & keys(void);
     BasicKey key(const BasicId & id) const;
+    BasicKey key(BaseState * state) const;
     BasicId id(const BasicKey key) const;
     BaseState * state(const BasicKey key) const;
     BaseState * state(const BasicId id) const;
@@ -43,11 +57,12 @@ public:
                               StateInterface * interface);
 
 signals:
-    void startingMachine(void);
-    void stopingMachine(void);
-    void terminatingMachine(void);
-    void errorMachine(Result result);
-    void messageMachine(QString message);
+    void initializedMachine(void);
+    void startedMachine(void);
+    void stopedMachine(void);
+    void terminatedMachine(void);
+    void machineError(Result result);
+    void machineMessage(QString message);
 
     void creatingState(BaseState * p, BasicKey key);
     void enteringState(BaseState * p, BasicKey key);
@@ -55,21 +70,26 @@ signals:
     void doneState(BaseState * p, BasicKey key);
     void leavingState(BaseState * p, BasicKey key);
     void terminatingState(BaseState * p, BasicKey key);
-    void destroyingState(BaseState * p, BasicKey key);
-    void errorState(BaseState * p, BasicKey key, Result result);
-    void messageState(BaseState * p, BasicKey key, QString message);
+    void destroyedState(BaseState * p, BasicKey key);
+    void stateError(BaseState * p,
+                    BasicKey key,
+                    Result result);
+    void stateMessage(BaseState * p,
+                      BasicKey key,
+                      QString message);
 
 public slots:
-    void start(void);
-    void stop(void);
-    void terminate(void);
+    virtual void initialize(void);
+    virtual void start(void);
+    virtual void stop(void);
+    virtual void terminate(void);
 
 public: // pseudo-private (called by child state)
     BasicKey addKey(const BasicId & stateId,
                     BaseState * state);
 
 protected:
-    BaseMachine(const IdInterfacePairList & idInterfacePairList,
+    BaseMachine(const BasicKeyManager::KeyIdPairList stateKeyIdList, const IdInterfacePairList & idInterfacePairList,
                 const SourceTargetStateList & stateList
                                         =SourceTargetStateList(),
                 const SignalTransitionList & signalList
@@ -86,6 +106,8 @@ private:
                          const MetaName & interfaceName);
     Success addUnconditionalTransitions(void);
     Success addStateSignalTransitions(void);
+    Success connectState(BaseState * state);
+
 
 private slots:
     void createState(BaseState * state, BasicKey key);
@@ -95,15 +117,25 @@ private slots:
     void leaveState(BaseState * state, BasicKey key);
     void terminateState(BaseState * state, BasicKey key);
     void destroyState(BaseState * state, BasicKey key);
-    void handleError(BaseState * state, BasicKey key, Result result);
-    void handleMessage(BaseState * state, BasicKey key, QString message);
+    void handleError(BaseState * state,
+                     BasicKey key,
+                     Result result);
+    void handleMessage(BaseState * state,
+                       BasicKey key,
+                       QString message);
+
+private slots: // handlers
+    void entered(void);
+    void exited(void);
+    void destroyed(QObject *pObj);
 
 private:
+    const BasicKeyManager::KeyIdPairList cmStateKeyIdList;
     const IdInterfacePairList cmIdBehaviorPairList;
     const SourceTargetStateList cmUndonditionalTransitionList;
     const SignalTransitionList cmSignalTransitionList;
     BasicKeyManager mKeys;
-    DualMap<BasicKey, BaseState *> mKeyStateMap;
+    DualMap<BasicKey, BaseState *> mKeyStateDMap;
 };
 
 #endif // BASEMACHINE_H

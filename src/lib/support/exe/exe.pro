@@ -22,7 +22,9 @@ SOURCES += ExeLib.cpp \
     StandardIO.cpp \
     StandardStream.cpp \
     BaseSerialStream.cpp \
-    PluginManager.cpp 
+    PluginManager.cpp \ 
+    ExecutableInterface.cpp \
+    ExecutableInitialization.cpp
 
 HEADERS += ExeLib.h \
     Exe_global.h \
@@ -34,7 +36,9 @@ HEADERS += ExeLib.h \
     StandardIO.h \
     StandardStream.h \
     BaseSerialStream.h \
-    PluginManager.h 
+    PluginManager.h \ 
+    ExecutableInterface.h \
+    ExecutableInitialization.h
 
 unix {
     target.path = /usr/lib

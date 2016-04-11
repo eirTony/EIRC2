@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <exe/ConsoleApplication.h>
-
+#include <exe/ExecutableInitialization.h>
 #include <type/Unsigned.h>
 #include <state/EclipseStateMachine.h>
 
@@ -15,20 +15,21 @@ class HelloCloudMachine : public ConsoleApplication
 {
     Q_OBJECT
 public:
-    explicit HelloCloudMachine(void);
+    explicit HelloCloudMachine(const ExecutableInitialization &
+                    initialization=ExecutableInitialization());
+
+    EclipseStateMachine * machine(void);
 
 signals:
 
 public slots:
 
-protected slots:
-    virtual void doInitialize(void);
-    virtual void doSetup(void);
-    virtual void doStart(void);
-
 private slots:
     void handleRequest(QHttpRequest  * request,
                        QHttpResponse * response);
+
+private slots: // virutal (overrides of protected above)
+    virtual void doInitialize(void);
 
 private:    // statics
     const static Unsigned16 csmDefaultHttpPort;

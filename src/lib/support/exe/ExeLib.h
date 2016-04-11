@@ -16,7 +16,7 @@
  * The ExeLib is...
  *
  */
-class EXESHARED_EXPORT ExeLib : public ModuleInfo
+class ExeLib : public ModuleInfo
 {
     DECLARE_SINGLETON(ExeLib) // ctor & more
 public:

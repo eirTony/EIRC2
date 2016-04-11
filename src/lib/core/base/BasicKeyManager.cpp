@@ -67,7 +67,6 @@ void BasicKeyManagerTest::add(void)
     BasicKey keyAddS0 = mKeys.add(idS0, current);
     QCOMPARE(keyS0(), keyAddS0());
 }
-
 #endif                                  //\\\\\\\ test
 
 BasicKey BasicKeyManager::add(const BasicId & id,
@@ -89,7 +88,7 @@ BasicKey BasicKeyManager::add(const BasicId & id,
     BasicKey parentKey = mKeyIdDMap.at(parents);
     TRACE("Parents: %1 0x%2", parents(),
           QString::number(parentKey(),16).toUpper());
-    if ("0" == id.name())
+    if (id.name().isEmpty())
     {
         basicKey = parentKey;
     }
@@ -174,6 +173,16 @@ BasicKey BasicKeyManager::newKey(const BasicId & prefixId,
     return answer;
 }
 
+bool BasicKeyManager::load(const KeyIdPairList & list)
+{
+    clear();
+    foreach (KeyIdPair pair, list)
+        mKeyIdDMap.insertUnique(pair.first, pair.second);
+    return true;
+}
+
+
+#ifdef BUILD_BASICKEYMANAGERINSTANCE
 #ifdef BUILD_BASICKEYMANAGERINSTANCE
 DEFINE_BASICSINGLETON(BasicKeyManagerInstance)
 BasicKeyManagerInstance::BasicKeyManagerInstance(void) {;}
