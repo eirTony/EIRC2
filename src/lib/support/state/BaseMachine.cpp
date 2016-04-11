@@ -2,10 +2,10 @@
 
 #include <QAbstractTransition>
 #include <QSignalTransition>
+#include <QTimer>
 
 #include <base/BasicKey.h>
 #include <base/Diagnostic.h>
-
 #include <kii/Name.h>
 
 #include "BaseState.h"
@@ -17,29 +17,71 @@
 
 /*---------- CONSTRUCTION ----------*/
 
-BaseMachine::BaseMachine(QObject * parent) : QStateMachine(parent) {;}
+BaseMachine::BaseMachine(QObject * parent)
+    : QStateMachine(parent) {;}
 
 // protected
-BaseMachine::BaseMachine(const IdInterfacePairList & idInterfacePairList,
-                         const SourceTargetStateList & stateList,
-                         const SignalTransitionList & signalList,
+BaseMachine::BaseMachine(const BasicKeyManager::KeyIdPairList
+                                stateKeyIdList,
+                         const IdInterfacePairList &
+                                idInterfacePairList,
+                         const SourceTargetStateList &
+                                stateList,
+                         const SignalTransitionList &
+                                signalList,
                          QObject * parent)
     : QStateMachine(parent)
+    , cmStateKeyIdList(stateKeyIdList)
     , cmIdBehaviorPairList(idInterfacePairList)
     , cmUndonditionalTransitionList(stateList)
     , cmSignalTransitionList(signalList)
 {
-    setupKeys();
-    WARNNOT(addAllStates());
-    WARNNOT(addUnconditionalTransitions());
+    keys().load(cmStateKeyIdList);
+    addUnconditionalTransitions();
     addStateSignalTransitions();
+    QTimer::singleShot(1, this, SLOT(initialize()));
+}
+
+void BaseMachine::command(const Command cmd)
+{
+    switch (cmd)
+    {
+    case Initialize:
+        QTimer::singleShot(10, this, SLOT(initialize()));
+        break;
+
+    case Start:
+        QTimer::singleShot(10, this, SLOT(initialize()));
+        break;
+
+    case Stop:
+        QTimer::singleShot(10, this, SLOT(initialize()));
+        break;
+
+    case Terminate:
+        QTimer::singleShot(10, this, SLOT(initialize()));
+        break;
+
+    case nullCommand:   /* nada */  break;
+    case sizeCommand:   /* nada */  break;
+    }
 }
 
 /*---------- ACCESS ----------*/
 
+BasicKeyManager & BaseMachine::keys(void)
+{
+    return mKeys;
+}
+
 BasicKey BaseMachine::key(const BasicId & id) const
 {
     return mKeys.key(id);
+}
+
+BasicKey BaseMachine::key(BaseState * state) const
+{
+    return mKeyStateDMap.at(state);
 }
 
 BasicId BaseMachine::id(const BasicKey key) const
@@ -49,12 +91,12 @@ BasicId BaseMachine::id(const BasicKey key) const
 
 BaseState * BaseMachine::state(const BasicId id) const
 {
-    return mKeyStateMap.at(key(id));
+    return mKeyStateDMap.at(key(id));
 }
 
 BaseState * BaseMachine::state(const BasicKey key) const
 {
-    return mKeyStateMap.at((key));
+    return mKeyStateDMap.at((key));
 }
 
 /*---------- INITIALIZATION ----------*/
@@ -73,7 +115,7 @@ BasicKey BaseMachine::addKey(const BasicId & stateId,
                                   "SubState", subName));
     CRITMSGIF(key.isNull(), "Unable to add " + stateId());
 
-    if (state)   mKeyStateMap.insertUnique(key, state);
+    if (state)   mKeyStateDMap.insertUnique(key, state);
 
     return key;
 }
@@ -155,8 +197,24 @@ BaseState * BaseMachine::addState(const BasicId & id,
     WARNNOT(state); if ( ! state) return state; //----------
 
     emit creatingState(state, state->key());
+    WARNNOT(connectState(state));
     return state;
 }
+
+Success BaseMachine::connectState(BaseState * state)
+{
+    Success success;
+
+    success.test(connect(state, SIGNAL(entered()),
+                         this, SLOT(entered())));
+    success.test(connect(state, SIGNAL(exited()),
+                         this, SLOT(exited())));
+    success.test(connect(state, SIGNAL(destroyed(QObject*)),
+                         this, SLOT(destroyed(QObject*))));
+
+    return success.tested();
+}
+
 
 // private
 Success BaseMachine::addUnconditionalTransitions(void)
@@ -233,32 +291,68 @@ void BaseMachine::terminateState(BaseState * state, BasicKey key)
 
 void BaseMachine::destroyState(BaseState * state, BasicKey key)
 {
-    emit destroyingState(state, key);
+    emit destroyedState(state, key);
 }
 
 void BaseMachine::handleError(BaseState * state, BasicKey key, Result result)
 {
-    emit errorState(state, key, result);
+    emit stateError(state, key, result);
 }
 
 void BaseMachine::handleMessage(BaseState * state, BasicKey key, QString message)
 {
-    emit messageState(state, key, message);
+    emit stateMessage(state, key, message);
 }
+
+/*---------- SLOT HANDLERS ----------*/
+
+void BaseMachine::entered(void)
+{
+    BaseState * state = qobject_cast<BaseState *>(sender());
+    if (state) enterState(state, key(state));
+}
+
+void BaseMachine::exited(void)
+{
+    BaseState * state = qobject_cast<BaseState *>(sender());
+    if (state) leaveState(state, key(state));
+}
+
+void BaseMachine::destroyed(QObject * pObj)
+{
+    BaseState * state = qobject_cast<BaseState *>(pObj);
+    if (state) destroyState(state, key(state));
+}
+
 
 /*---------- MACHINE SLOTS ----------*/
 
+// virtual
+void BaseMachine::initialize(void)
+{
+    TODO("Stuff");
+    emit initializedMachine();
+}
+
+// virtual
 void BaseMachine::start(void)
 {
-    ;
+    TODO("Stuff");
+    QStateMachine::start();
+    emit startedMachine();
 }
 
+// virtual
 void BaseMachine::stop(void)
 {
-    ;
+    TODO("Stuff");
+    QStateMachine::stop();
+    emit stopedMachine();
 }
 
+// virtual
 void BaseMachine::terminate(void)
 {
-    ;
+    TODO("Stuff");
+    emit terminatedMachine();
 }

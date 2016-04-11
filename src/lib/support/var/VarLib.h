@@ -7,7 +7,7 @@ class VARSHARED_EXPORT VarLib
 {
 
 public:
-    VarLib();
+    VarLib(void);
 };
 
 #endif // VAR_H

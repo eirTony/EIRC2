@@ -4,8 +4,10 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     ../lib/core/base \
-    ../lib/support/exe \
+    ../lib/core/type \
+    ../lib/support/res \
     ../lib/support/state \
+    ../lib/support/exe \
  #   ../lib/worker/msg \
    # ../lib/worker/work \
     ../lib/third/qhttpserver \

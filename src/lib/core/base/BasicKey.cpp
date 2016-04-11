@@ -3,6 +3,7 @@
 
 #include "BasicKey.h"
 
+#include "BasicId.h"
 #include "Diagnostic.h"
 
 const quint64 BasicKey::csmMasks[] = { 0,
@@ -26,13 +27,30 @@ BasicKey::BasicKey(const quint8 upperGroup,
     setLower(lowerGroup, lowerValue);
 }
 
-#ifdef BUILD_TEST
+BasicKey::BasicKey(const BasicId & id,
+                   const BasicKey other)
+    : mKeyU64(0)
+{
+    set(id, other);
+}
+
+#ifdef BUILD_TEST                       ///////// TEST
 BasicKeyTest::BasicKeyTest(QObject * parent)
     : TestObject("BaseLib/BasicKey", parent)
 {
     TRACE("in BasicKeyTest ctor", "");
 }
-#endif
+#endif                                  //\\\\\\\ test
+
+void BasicKey::clear(void)
+{
+    set(0);
+}
+
+void BasicKey::set(const quint64 other)
+{
+    mKeyU64 = other;
+}
 
 void BasicKey::set(const Part part,
                    const BasicKey other)
@@ -41,9 +59,67 @@ void BasicKey::set(const Part part,
     quint64 u64 = mKeyU64;
     u64 &= ~ mask;
     u64 |= other.masked(mask)();
+    mKeyU64 = u64;
 }
 
-#ifdef BUILD_TEST
+#ifdef BUILD_TEST                       ///////// TEST
+void BasicKeyTest::setBasicId(void)
+{
+    QCOMPARE(noKey.isNull(), true);
+    QCOMPARE(noKey.isZero(), true);
+    QCOMPARE(keyNoId.isNull(), true);
+    QCOMPARE(keyNoId.isZero(), true);
+
+    QCOMPARE(keyS.get(BasicKey::UpperGroup)(),
+             current.get(BasicKey::UpperGroup)());
+    QCOMPARE(keyS.get(BasicKey::UpperValue)(), (quint64)(0));
+    QCOMPARE(keyS.get(BasicKey::LowerGroup)(), (quint64)(0));
+    QCOMPARE(keyS.get(BasicKey::LowerValue)(), (quint64)(0));
+
+    QCOMPARE(keyS0.get(BasicKey::UpperGroup)(),
+             current.get(BasicKey::UpperGroup)());
+    QCOMPARE(keyS.get(BasicKey::UpperValue)(), (quint64)(0));
+    QCOMPARE(keyS0.get(BasicKey::LowerGroup)(), (quint64)(0));
+    QCOMPARE(keyS0.get(BasicKey::LowerValue)(), (quint64)(0));
+
+    QCOMPARE(keyS0s.get(BasicKey::UpperGroup)(),
+             current.get(BasicKey::UpperGroup)());
+    QCOMPARE(keyS0s.get(BasicKey::UpperValue)(), (quint64)(0));
+    QCOMPARE(keyS0s.get(BasicKey::LowerGroup)(),
+             current.get(BasicKey::LowerGroup)());
+    QCOMPARE(keyS0s.get(BasicKey::LowerValue)(), (quint64)(0));
+
+    QCOMPARE(keyS0s0.get(BasicKey::UpperGroup)(),
+             current.get(BasicKey::UpperGroup)());
+    QCOMPARE(keyS0s0.get(BasicKey::UpperValue)(), (quint64)(0));
+    QCOMPARE(keyS0s0.get(BasicKey::LowerGroup)(),
+             current.get(BasicKey::LowerGroup)());
+    QCOMPARE(keyS0s0.get(BasicKey::LowerValue)(), (quint64)(0));
+
+    QCOMPARE(keyS(),    keyS0());
+    QCOMPARE(keyS0s(),  keyS0s0());
+}
+#endif                                  //\\\\\\\ test
+
+void BasicKey::set(const BasicId & id,
+                   const BasicKey other)
+{
+    BasicNameList bnl = id.toList();
+    if (bnl.size() >= AllParts || bnl.size() < 1) return; //----------
+    clear();
+    BasicKey newestKey = other.isNull() ? newKey() : other;
+    int iPart = (int)NoParts;
+    while ( ! bnl.isEmpty())
+    {
+        BasicName name = bnl.takeFirst();
+        set(Part(++iPart), name.isEmpty() ? 0 : newestKey);
+    }
+    TRACE("BK::set(%1(%2), 0x%3)=%4", id(), id.size(),
+          QString::number(other(), 16).toUpper(),
+          QString::number(toU64(), 16).toUpper());
+}
+
+#ifdef BUILD_TEST                       ///////// TEST
 void BasicKeyTest::setUpperLower(void)
 {
     BasicKey bk;
@@ -66,7 +142,7 @@ void BasicKeyTest::setUpperLower(void)
     QCOMPARE(int(bk.lowerValue()), 0xBCDEF0);
     QCOMPARE(bk(), 0xBCDEF09A34567812LLU);
 }
-#endif
+#endif                                  //\\\\\\\ test
 
 void BasicKey::setUpper(const quint8 keyGroup,
                          const uint keyValue)
@@ -90,9 +166,45 @@ bool BasicKey::isZero(void) const
     return ! mKeyU64;
 }
 
+bool BasicKey::isValid(void) const
+{
+    return !! mUpperGroup;
+}
+
 bool BasicKey::isUpper(void) const
 {
-    return 0 == mLowerSegment;
+    return ( !! mUpperGroup) && ( !mLowerSegment);
+}
+
+BasicKey::PartSet BasicKey::parts(void) const
+{
+    PartSet parts;
+    for (Part part = Part::UpperGroup;
+         part <= Part::LowerValue;
+         part = Part(part + 1))
+        if ( !! get(part)())
+            parts.insert(part);
+    return parts;
+}
+
+bool BasicKey::overlaps(const BasicKey other) const
+{
+    PartSet myParts = parts();
+    PartSet otherParts = other.parts();
+    return ( ! myParts.intersect(otherParts).size());
+}
+
+BasicKey BasicKey::unionWith(const BasicKey other)
+{
+    return BasicKey(overlaps(other)
+                    ? 0
+                    : (mKeyU64 | other.mKeyU64));
+
+}
+
+BasicKey BasicKey::operator |= (const BasicKey other)
+{
+    return unionWith(other);
 }
 
 bool BasicKey::operator < (const BasicKey rhs) const
@@ -100,9 +212,14 @@ bool BasicKey::operator < (const BasicKey rhs) const
     return mKeyU64 < rhs.mKeyU64;
 }
 
-quint64 BasicKey::operator() (void) const
+quint64 BasicKey::toU64(void) const
 {
     return mKeyU64;
+}
+
+quint64 BasicKey::operator() (void) const
+{
+    return toU64();
 }
 
 uint BasicKey::lowerValue(void) const
@@ -125,7 +242,7 @@ quint8 BasicKey::upperGroup(void) const
     return mUpperGroup;
 }
 
-BasicKey BasicKey::get(const BasicKey::Part part)
+BasicKey BasicKey::get(const BasicKey::Part part) const
 {
     return masked(csmMasks[part]);
 }
@@ -146,3 +263,13 @@ BasicKey BasicKey::newKey(void)
     u64 |= quint64(u32) >> (32 - shift);
     return BasicKey(u64);
 }
+
+// static
+BasicKey::Part BasicKey::part(const BasicId & id)
+{
+    return (id.size() < Part::sizePart) ? Part(id.size()) : sizePart;
+}
+
+#ifdef BUILD_TEST
+
+#endif

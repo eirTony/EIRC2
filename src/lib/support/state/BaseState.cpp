@@ -18,6 +18,7 @@ BaseState::BaseState(const BasicId id,
     FATALNOT(mpMachine);
     mKey = mpMachine->addKey(id, this);
     WARNIF(mKey.isNull());
+    setObjectName("BaseState:" + id());
 
     setupConnections();
 

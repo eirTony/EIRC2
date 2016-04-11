@@ -6,7 +6,9 @@
 
 #include <QtDebug>
 
-#include "BasicKey.h"
+//#include "BasicKey.h"
+//#include "BasicKeyManager.h"
+#include "BasicKeyManager.h"
 #include "BasicName.h"
 #include "Diagnostic.h"
 #include "TestObject.h"
@@ -82,16 +84,19 @@ QString BaseLib::formatMessage(const QString & format,
 
 void BaseLib::doExecute(void)
 {
-    TRACE("We're %1", "here!");
+    TRACE("in BaseLib::doExecute()", 0);
 }
 
 void BaseLib::doInitialize(void)
 {
     TRACE("We're %1", "there!");
-//    TESTOBJ(BasicKeyTest);
+#ifdef BUILD_TEST
     BasicIdTest bit;
     BasicKeyTest bkt;
+    BasicKeyManagerTest bkmt;
     TestObject::execAll();
+#endif
     TODO("RUN_TEST macros")
+    TRACE("%1::%2()", "BaseLib", "doInitialize");
 }
 

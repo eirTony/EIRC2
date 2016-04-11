@@ -6,15 +6,15 @@
 #include <work/EclipseWorkMessageMachine.h>
 
 HelloCloudConsole::HelloCloudConsole(void)
-    : cmpMachine(new EclipseWorkMessageMachine(this))
+//    : cmpMachine(new EclipseWorkMessageMachine(this))
 {
     setVersion();
     NEEDDO("Why VersionInfo.isNull()?");
     INFO("HelloCloudConsole %1 started",
          ModuleInfo::version().toString(true));
     QObject::setObjectName("HelloCloudConsole");
-    WARNNOT(connect(app(), SIGNAL(aboutToQuit()),
-                    this, SLOT(quitting())));
+    WARNNOT(connect(app(), &QCoreApplication::aboutToQuit,
+                    this, &HelloCloudConsole::quitting));
 }
 
 void HelloCloudConsole::doInitialize(void)
@@ -33,17 +33,20 @@ void HelloCloudConsole::doSetup(void)
 void HelloCloudConsole::doStart(void)
 {
     SerialExecutable::writeLine("HelloCloudConsole ready");
-    TODO("Why not in private slot quitting()")
+#if 0
+    TODO("Why not in private slot quitting()");
     WARNNOT(DiagnosticItem::todoReport("./log/"
                                + ExecutableSupport::appName()
                                + ".todo"));
+#endif
     QTimer::singleShot(5000, this, SLOT(quit()));
 }
 
 // private slot
 void HelloCloudConsole::quitting(void)
 {
-    DiagnosticItem::todoReport("./log/"
+    TRACE("HelloCloudConsole::quitting(void)", 0)
+    WARNNOT(DiagnosticItem::todoReport("./log/"
                                + ExecutableSupport::appName()
-                               + ".todo");
+                               + ".todo"));
 }

@@ -5,52 +5,54 @@
 #include <QTimer>
 
 #include <base/BaseLib.h>
+//#include <base/BasicKeyManager.h>
 #include <base/Diagnostic.h>
+#include <exe/ExecutableInitialization.h>
 #include <qhttpserver/qhttpserver.h>
 
 const Unsigned16 HelloCloudMachine::csmDefaultHttpPort = 27850;
 
-HelloCloudMachine::HelloCloudMachine(void)
+
+HelloCloudMachine::HelloCloudMachine(const
+                                     ExecutableInitialization &
+                                            initialization)
+    : ConsoleApplication(initialization)
 {
     ModuleInfo::setVersion();
     INFO("HelloCloudMachine %1 constructed",
          ModuleInfo::version().toString(true));
 
     //-----Machine
-    mpMachine = new EclipseStateMachine(this);
+    WARNNOT(connect(machine(), SIGNAL(initializedMachine()),
+                    machine(), SLOT(start())));
 
     //-----Http
     mpHttpServer = new QHttpServer(this);
     TRACE("QHttpServer constructed", "");
     TODO("Why TRACE macro ...args not working?");
 
-    mHttpPort = BaseLib::reference()
-            .systemEnvironmentValue("PORT",
-                                    QVariant(mHttpPort)).toUInt();
-    CRITMSGNOT(mpHttpServer->listen(mHttpPort),
-               "HelloCloudMachine failed to start HTTP server");
-    CRITNOT(connect(mpHttpServer, SIGNAL(newRequest(QHttpRequest*,
-                                                    QHttpResponse*)),
-                    this, SLOT(handleRequest(QHttpRequest*,
-                                             QHttpResponse*))));
-    //INFO("HelloCloudMachine listening on port %1", mHttpPort);
+    mHttpPort = Unsigned16(initialization.value("PORT",
+                        QVariant(csmDefaultHttpPort)).toUInt());
+
+}
+
+// private virtual
+EclipseStateMachine * HelloCloudMachine::machine(void)
+{
+    return mpMachine;
 }
 
 void HelloCloudMachine::doInitialize(void)
 {
-    TODO("HelloCloudMachine::doInitialize(void)")
-}
+    ExecutableInterface::doInitialize();
 
-void HelloCloudMachine::doSetup(void)
-{
-    TODO("HelloCloudMachine::doSetup(void)")
-}
-
-void HelloCloudMachine::doStart(void)
-{
-    TODO("HelloCloudMachine::doStart(void)")
-
-    QTimer::singleShot(5000, this, SLOT(quit()));
+    CRITMSGNOT(mpHttpServer->listen(mHttpPort),
+               "HelloCloudMachine failed to start HTTP server");
+    CRITNOT(connect(mpHttpServer,
+                    SIGNAL(newRequest(QHttpRequest *)),
+                    this,
+                    SLOT(handleRequest(QHttpRequest *))));
+    INFO("HelloCloudMachine listening on port %1", mHttpPort());
 }
 
 void HelloCloudMachine::handleRequest(QHttpRequest  * request,

@@ -2,13 +2,18 @@
 
 #include "BaseSerialStream.h"
 
-SerialExecutable::SerialExecutable(BaseSerialStream * textStream)
-    : ExecutableSupport(ExecutableSupport::Serial)
+SerialExecutable::SerialExecutable(BaseSerialStream *
+                                        serialStream,
+                                   const BasicId::VariantMap
+                                        initialization)
+    : ExecutableSupport(ExecutableSupport::Serial,
+                        initialization,
+                        this)
+    , mpSerialStream(serialStream)
 {
-    setStream(textStream);
 }
 
-void SerialExecutable::setStream(BaseSerialStream *textStream)
+void SerialExecutable::setStream(BaseSerialStream * textStream)
 {
     mpSerialStream = textStream;
 }
@@ -31,23 +36,4 @@ bool SerialExecutable::writeLine(const QString & line)
 bool SerialExecutable::writeError(const QString & error)
 {
     return mpSerialStream ? mpSerialStream->writeError(error) : false;
-}
-
-
-void SerialExecutable::initialize(void)
-{
-    ExecutableSupport::initialize();
-    // do stuff
-}
-
-void SerialExecutable::setup(void)
-{
-    ExecutableSupport::setup();
-    // do stuff
-}
-
-void SerialExecutable::start(void)
-{
-    ExecutableSupport::start();
-    // do stuff
 }

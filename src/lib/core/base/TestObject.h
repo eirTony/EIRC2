@@ -81,6 +81,7 @@ private: // static
     static QMap<QString, TestObject *> smIdTestMap;
 };
 
+
 #define TESTOBJ(cls) { cls test; (void)test; }
 
 #endif // TESTOBJECT_H

@@ -12,6 +12,8 @@ public:
     bool yes(void);
     bool no(void);
     bool expect(const bool isTrue);
+    void test(const bool isTrue);
+    Success tested(void);
     operator bool (void) const;
 
 private:

@@ -11,11 +11,12 @@
 
 const QChar BasicId::csmDelimChar('/');
 
-#ifdef BUILD_TEST
+#ifdef BUILD_TEST                       ///////// TEST
+
 BasicIdTest::BasicIdTest(QObject * parent)
     : TestObject("BaseLib/BasicId", parent) {;}
 
-void BasicIdTest::ctors(void)           // ///// Test
+void BasicIdTest::ctors(void)
 {
     QCOMPARE(nullId.isNull(), true);
     QCOMPARE(oneId.isNull(), false);
@@ -36,13 +37,16 @@ void BasicIdTest::ctors(void)           // ///// Test
     QCOMPARE(twoId.toString('~'),   QString("one~two"));
     QCOMPARE(treId.toString(),      QString("one/two/tre"));
     QCOMPARE(forId.toString(' '),   QString("one two tre for"));
+    QCOMPARE(forId.parents(),       treId);
+    QCOMPARE(twoId.parent(),        BasicName("one"));
+
     QCOMPARE(stringId.toString(), idString);
 
     BasicName superName("0");
     BasicId superId(superName, "MachineInitial");
     QCOMPARE(superId.toString(), QString("0/MachineInitial"));
-}                                       // \\\\\ Test
-#endif
+}
+#endif                                  //\\\\\\\ test
 
 BasicId::BasicId(void) {;}
 
@@ -51,7 +55,7 @@ BasicId::BasicId(const BasicName & firstName,
                  const BasicName & thirdName,
                  const BasicName & fourthName)
 {
-//    qDebug() << "BasicId::ctor(%1, %2, %3, %4" << firstName()
+//    qDebug() << "BasicId::ctor()" << firstName()
   //        << secondName() << thirdName() << fourthName();
     BasicNameList nameList;
     nameList.append(firstName);
@@ -59,7 +63,7 @@ BasicId::BasicId(const BasicName & firstName,
     if ( ! thirdName.isNull())  nameList.append(thirdName);
     if ( ! fourthName.isNull()) nameList.append(fourthName);
     set(nameList);
-//    qDebug() << "BasicId result {" << toString() << ";";
+    //qDebug() << "BasicId result {" << toString() << "}";
 }
 
 
@@ -79,8 +83,8 @@ BasicId::BasicId(const BasicNameList &otherList)
     set(otherList);
 }
 
-#ifdef BUILD_TEST
-void BasicIdTest::set(void)             // ///// Test
+#ifdef BUILD_TEST                       ///////// TEST
+void BasicIdTest::set(void)
 {
     BasicId id;
     QCOMPARE(id.isNull(), true);
@@ -97,9 +101,13 @@ void BasicIdTest::set(void)             // ///// Test
     QCOMPARE(id.toString(), QString("this/aint/a/test/oops"));
     id.set(7, "seven");
     QCOMPARE(id.toString(), QString("this/aint/a/test/oops"));
-}                                       // \\\\\ Test
 
-void BasicIdTest::white(void)           // ///// Test
+    BasicId keyId("Super/0/Sub/0");
+    QCOMPARE(keyId.at(1), BasicName());
+    QCOMPARE(keyId.at(1), BasicName(""));
+}
+
+void BasicIdTest::white(void)
 {
     QString string = idString;
     string.replace('/', " \t\r\n    ");
@@ -107,7 +115,7 @@ void BasicIdTest::white(void)           // ///// Test
     QCOMPARE(id.toString(), idString);
     QCOMPARE(id.toString(' '), QString("this is a test"));
 }                                       // \\\\\ Test
-#endif
+#endif                                  //\\\\\\\ test
 
 void BasicId::set(const QString & string, QChar delimiter)
 {
@@ -180,6 +188,12 @@ BasicName BasicId::name(void) const
     return mNameList.last();
 }
 
+BasicName BasicId::parent(void) const
+{
+    int k = size();
+    return (k > 1 && k < 5) ? at(k-2) : BasicName();
+}
+
 BasicId BasicId::parents(void) const
 {
     BasicNameList resultNameList = mNameList;
@@ -195,6 +209,11 @@ int BasicId::size(void) const
 bool BasicId::isNull(void) const
 {
     return mNameList.isEmpty();
+}
+
+BasicNameList BasicId::toList(void) const
+{
+    return mNameList;
 }
 
 bool BasicId::operator < (const BasicId & rhs) const

@@ -5,7 +5,6 @@ class QTextStream;
 
 #include "BaseSerialStream.h"
 
-
 class StandardStream : public BaseSerialStream
 {
 public:

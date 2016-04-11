@@ -1,7 +1,7 @@
 #ifndef ECLIPSEWORKMESSAGEMACHINE_H
 #define ECLIPSEWORKMESSAGEMACHINE_H
 #include "WorkLib.h"
-#if 1
+#if 0
 #include <QObject>
 
 #include <base/BasicId.h>

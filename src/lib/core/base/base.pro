@@ -29,7 +29,8 @@ SOURCES += BaseLib.cpp \
     ./_internal/ModuleManager.cpp \
     BasicKeySegment.cpp \
     BasicKeyManager.cpp \
-    TestObject.cpp
+    TestObject.cpp \
+    DiagnosticOutput.cpp
 
 HEADERS += BaseLib.h\
         base_global.h \
@@ -51,7 +52,8 @@ HEADERS += BaseLib.h\
     ./_internal/ModuleManager.h \
     BasicKeySegment.h \
     BasicKeyManager.h \
-    TestObject.h
+    TestObject.h \
+    DiagnosticOutput.h
 
 unix {
     target.path = /usr/lib
