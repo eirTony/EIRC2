@@ -15,7 +15,7 @@ LIBS *= -leirBase
 SOURCES += SysLib.cpp
 
 HEADERS += SysLib.h \
-    Sys_global.h \
+    sys_global.h \
     Version.h \
     ../../../CommonVersion.h
 

@@ -1,12 +1,12 @@
 #ifndef CONSOLEUNO_H
 #define CONSOLEUNO_H
 
-#include <exe/UnitTestConsole.h>
+#include <exe/ConsoleApplication.h>
 
 class EclipseMessage;
 class EclipseWorkMessageMachine;
 
-class ConsoleUno : public UnitTestConsole
+class ConsoleUno : public ConsoleApplication
 {
     Q_OBJECT
 public:
@@ -18,10 +18,8 @@ public:
 signals:
 
 public slots:
-    virtual void doInitialize(BasicName::VariantMap init
-                                =BasicName::VariantMap());
-    virtual void doSetup(BasicId::VariantMap config
-                                =BasicId::VariantMap());
+    virtual void doInitialize(void);
+    virtual void doSetup(void);
     virtual void doStart(void);
 
 signals:
@@ -31,7 +29,7 @@ public slots:
     void receive(const EclipseMessage & msg);
 
 private:
-    EclipseWorkMessageMachine * mpEWMM = 0;
+    EclipseWorkMessageMachine * mpMachine = 0;
 };
 
 #endif // CONSOLEUNO_H

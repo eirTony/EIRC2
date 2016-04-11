@@ -8,10 +8,8 @@ class AntzConsole : public ConsoleApplication
     Q_OBJECT
 public:
     AntzConsole(void);
-    virtual void doInitialize(BasicName::VariantMap init
-                              =BasicName::VariantMap()) {}
-    virtual void doSetup(BasicId::VariantMap config
-                         =BasicId::VariantMap()) {}
+    virtual void doInitialize(void) {}
+    virtual void doSetup(void) {}
     virtual void doStart(void);
 };
 

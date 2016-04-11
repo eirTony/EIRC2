@@ -2,8 +2,10 @@
  */
 #ifndef CfgLib_H
 #define CfgLib_H
-#define MODULE_NAME "eirCfg"
-#include "Cfg_global.h"
+#ifndef MODULE_NAME
+# define MODULE_NAME "eirCfg"
+#endif
+#include "cfg_global.h"
 
 #include <base/ModuleInfo.h>
 #include <core/Singleton.h>
@@ -17,15 +19,8 @@
  */
 class CFGSHARED_EXPORT CfgLib : public ModuleInfo
 {
+    DECLARE_SINGLETON(CfgLib) // ctor & more
 public:
-    CfgLib(void);
-    //virtual void executeUnitTest(void);
 };
-
-/*! @typedef Cfg
- *
- * @brief Is the StaticSingleton instance of CfgLib
- */
-typedef StaticSingleton<CfgLib> Cfg;
 
 #endif // CfgLib_H

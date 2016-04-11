@@ -1,5 +1,6 @@
 
-QT       -= gui
+QT      -= gui
+QT      += xml
 
 TARGET = eirData
 TEMPLATE = lib
@@ -11,12 +12,20 @@ include (../common.pri)
 win32:RC_FILE = WinRes.rc
 
 LIBS *= -leirBase
+LIBS *= -leirType
 
-SOURCES += DataLib.cpp
+SOURCES += DataLib.cpp \
+    DataType.cpp \
+    StringBehavior.cpp \
+    TypeBehavior.cpp
 
 HEADERS += DataLib.h \
     Version.h \
-    ../../../CommonVersion.h
+    ../../../CommonVersion.h \
+    data_global.h \
+    DataType.h \
+    StringBehavior.h \
+    TypeBehavior.h
 
 unix {
     target.path = /usr/lib

@@ -6,7 +6,8 @@
 
 #include <QtDebug>
 
-SysLib * gpSys = &(Sys::instance());
+DEFINE_SINGLETON(SysLib)
+const SysLib * cgpSys = SysLib::pointer();
 
 /*! @fn SysLib::SysLib(void)
  *

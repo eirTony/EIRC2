@@ -1,12 +1,12 @@
-/*! @file Type.cpp Definitions for Type class
+/*! @file DataType.cpp Definitions for DataType class
 *
 */
 #include "DataType.h"
 
+#include <QDomElement>
 #include <QMetaType>
-class QDomElement;
 
-#include <base/BaseLog.h>
+#include <base/Diagnostic.h>
 
 #include "TypeBehavior.h"
 
@@ -87,7 +87,7 @@ TypeBehavior * DataType::behavior(void)
     if (type_behavior_map.contains(type_i))
         return type_behavior_map.value(type_i);
 
-    BMUSTDO(QString(name()));
+    MUSTDO(QString(name()));
     return 0;
 }
 
@@ -95,9 +95,9 @@ void DataType::addBehavior(const int metaType,
                            TypeBehavior * behavior)
 {
     if (QMetaType::UnknownType == metaType)
-    {    BMUSTDO(metaType); }
+    {    MUSTDO(metaType); }
     else if ( ! QMetaType::isRegistered(metaType))
-    {    BMUSTDO(metaType); }
+    {    MUSTDO(metaType); }
     else
         type_behavior_map.insert(metaType, behavior);
 }
@@ -108,9 +108,9 @@ void DataType::addBehavior(const char * typeName,
 {
     int metaType = QMetaType::type(typeName);
     if (QMetaType::UnknownType == metaType)
-    {    BMUSTDO(typeName); }
+    {    MUSTDO(typeName); }
     else if ( ! QMetaType::isRegistered(metaType))
-    {    BMUSTDO(typeName); }
+    {    MUSTDO(typeName); }
     else
         type_behavior_map.insert(metaType, behavior);
 }

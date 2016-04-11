@@ -11,25 +11,39 @@ include (../common.pri)
 win32:RC_FILE = WinRes.rc
 
 LIBS *= -leirBase
+LIBS *= -leirData
+LIBS *= -leirType
 
 SOURCES += KiiLib.cpp \
-    AbstractId.cpp \
-    AbstractName.cpp \
     BaseNameIdBehavior.cpp \
     UniversalKey.cpp \
     BaseKiiItem.cpp \
     BaseKeyBehavior.cpp \
     BaseIdBehavior.cpp \
     BaseInfoBehavior.cpp \
-    BaseKey.cpp \
-    BaseId.cpp \
-    BaseInfo.cpp
+    Key.cpp \
+    Id.cpp \
+    Info.cpp \
+    KiiRing.cpp \
+    Name.cpp \
+    Kii.cpp \
+    KiiManager.cpp \
+    KiiTaxonomy.cpp \
+    KiiCutter.cpp \
+    KiiClassification.cpp \
+    KiiClassId.cpp \
+    KiiClassKey.cpp \
+    KiiClassName.cpp \
+    KiiInfo.cpp \
+    KeySegment.cpp \
+    KeyBuilder.cpp \
+    KiiRingPlugin.cpp \
+    KiiRingInterface.cpp \
+    KiiRingBuiltin.cpp
 
 HEADERS += KiiLib.h \
     Version.h \
     ../../../CommonVersion.h \
-    AbstractId.h \
-    AbstractName.h \
     BaseNameIdBehavior.h \
     UniversalKey.h \
     kii_global.h \
@@ -37,9 +51,25 @@ HEADERS += KiiLib.h \
     BaseKeyBehavior.h \
     BaseIdBehavior.h \
     BaseInfoBehavior.h \
-    BaseKey.h \
-    BaseId.h \
-    BaseInfo.h
+    Key.h \
+    Id.h \
+    Info.h \
+    KiiRing.h \
+    Name.h \
+    Kii.h \
+    KiiManager.h \
+    KiiTaxonomy.h \
+    KiiCutter.h \
+    KiiClassification.h \
+    KiiClassId.h \
+    KiiClassKey.h \
+    KiiClassName.h \
+    KiiInfo.h \
+    KeySegment.h \
+    KeyBuilder.h \
+    KiiRingPlugin.h \
+    KiiRingInterface.h \
+    KiiRingBuiltin.h
 
 unix {
     target.path = /usr/lib

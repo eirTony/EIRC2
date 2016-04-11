@@ -1,31 +1,13 @@
-/*! @file   VarLib.h   Eclipse VarLib declaration
- */
-#ifndef VarLib_H
-#define VarLib_H
-#define MODULE_NAME "eirVar"
+#ifndef VAR_H
+#define VAR_H
+
 #include "var_global.h"
 
-#include <base/ModuleInfo.h>
-#include <core/Singleton.h>
-
-/*! @class VarLib
- * @brief The VarLib is the base class in the eirVar library.
- *
- * The VarLib is an Var Eclipse library from which new
- * libraries can be based.
- *
- */
-class VARSHARED_EXPORT VarLib : public ModuleInfo
+class VARSHARED_EXPORT VarLib
 {
+
 public:
-    VarLib(void);
-    //virtual void executeUnitTest(void);
+    VarLib();
 };
 
-/*! @typedef Var
- *
- * @brief Is the StaticSingleton instance of VarLib
- */
-typedef StaticSingleton<VarLib> Var;
-
-#endif // VarLib_H
+#endif // VAR_H

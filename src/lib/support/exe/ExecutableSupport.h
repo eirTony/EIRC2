@@ -4,8 +4,10 @@
 
 #include <QObject>
 #include <base/ModuleInfo.h>
-#include <type/QQFileInfo.h>
-#include <type/QQStringList.h>
+
+#include <QFileInfo>
+#include <QStringList>
+
 #include <cfg/Configuration.h>
 
 #include <QFileInfo>
@@ -16,7 +18,7 @@ class QCoreApplication;
 
 
 class EXESHARED_EXPORT ExecutableSupport
-        : public QObject, public ModuleInfo
+        : public ModuleInfo
 {
     Q_OBJECT
 
@@ -34,14 +36,24 @@ public:
 public:
     QCoreApplication * app(void) const;
     const QFileInfo & exeFileInfo(void) const;
+    QString appName(void) const;
+    BasicName::VariantMap initialization(void) const;
+    Configuration configuration(void) const;
 
 protected:
     explicit ExecutableSupport(const ApplicationClass appClass,
                                QObject * parent=0);
-
+    virtual bool event(QEvent * event);
 
 signals:
-    void quitApp(void);
+    void constructing(void);
+    void executing(void);
+    void initializing(void);
+    void configuring(void);
+    void testing(void);
+    void starting(void);
+    void stoping(void);
+    void quiting(void);
 
 protected slots:
     void initialize(void);
@@ -54,8 +66,8 @@ private:
     QApplication * mpApplication = 0;
     QGuiApplication * mpGuiApplication = 0;
     QCoreApplication * mpCoreApplication = 0;
-    QQStringList mRawApplicationArguments;
-    QQFileInfo mExeFileInfo;
+    QStringList mRawApplicationArguments;
+    QFileInfo mExeFileInfo;
     Configuration mConfiguration;
     BasicName::VariantMap mInitialization;
 };

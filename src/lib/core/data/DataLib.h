@@ -2,7 +2,6 @@
  */
 #ifndef DataLib_H
 #define DataLib_H
-#define MODULE_NAME "eirData"
 #include "data_global.h"
 
 #include <base/ModuleInfo.h>
@@ -11,21 +10,13 @@
 /*! @class DataLib
  * @brief The DataLib is the base class in the eirData library.
  *
- * The DataLib is an Data Eclipse library from which new
- * libraries can be based.
+ * The DataLib is ...
  *
  */
 class DATASHARED_EXPORT DataLib : public ModuleInfo
 {
+    DECLARE_SINGLETON(DataLib) // ctor & more
 public:
-    DataLib(void);
-    //virtual void executeUnitTest(void);
 };
-
-/*! @typedef Data
- *
- * @brief Is the StaticSingleton instance of DataLib
- */
-typedef StaticSingleton<DataLib> Data;
 
 #endif // DataLib_H

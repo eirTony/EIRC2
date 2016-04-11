@@ -5,13 +5,13 @@
 
 class EclipseMessage;
 
-class EclipseWorkMessageMachine;
+//class EclipseWorkMessageMachine;
 
 class EclipseWorkSupervisor : public QObject
 {
     Q_OBJECT
 public:
-    explicit EclipseWorkSupervisor(EclipseWorkMessageMachine * boss=0);
+    explicit EclipseWorkSupervisor(QObject *boss=0);
 
 signals:
     void error(const QString & errorString);
@@ -24,7 +24,7 @@ private:
     void ExecuteEnquriry(void); // emit result(msg)
 
 private:
-    EclipseWorkMessageMachine * mpEWMM = 0;
+  //  EclipseWorkMessageMachine * mpEWMM = 0;
 };
 
 #endif // ECLIPSEWORKSUPERVISOR_H

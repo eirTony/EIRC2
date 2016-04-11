@@ -18,17 +18,17 @@ BaseSerialStream *SerialExecutable::stream(void)
     return mpSerialStream;
 }
 
-QQString SerialExecutable::readLine(void)
+QString SerialExecutable::readLine(void)
 {
     return mpSerialStream ? mpSerialStream->readLine() : QString();
 }
 
-bool SerialExecutable::writeLine(const QQString & line)
+bool SerialExecutable::writeLine(const QString & line)
 {
     return mpSerialStream ? mpSerialStream->writeLine(line) : false;
 }
 
-bool SerialExecutable::writeError(const QQString & error)
+bool SerialExecutable::writeError(const QString & error)
 {
     return mpSerialStream ? mpSerialStream->writeError(error) : false;
 }

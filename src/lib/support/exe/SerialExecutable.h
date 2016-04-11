@@ -2,8 +2,6 @@
 #define SERIALEXECUTABLE_H
 #include "ExeLib.h"
 
-#include <type/QQString.h>
-
 #include "ExecutableSupport.h"
 
 class BaseSerialStream;
@@ -14,9 +12,9 @@ class EXESHARED_EXPORT SerialExecutable : public ExecutableSupport
 public:
     void setStream(BaseSerialStream * textStream);
     BaseSerialStream * stream(void);
-    QQString readLine(void);
-    bool writeLine(const QQString & line);
-    bool writeError(const QQString & error);
+    QString readLine(void);
+    bool writeLine(const QString & line);
+    bool writeError(const QString & error);
 
 signals:
 

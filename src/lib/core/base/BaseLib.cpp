@@ -6,26 +6,48 @@
 
 #include <QtDebug>
 
-BaseLib * gpBase = &(Base::instance());
+#include "BasicKey.h"
+#include "BasicName.h"
+#include "Diagnostic.h"
+#include "TestObject.h"
+#include "_internal/ModuleManager.h"
+
+DEFINE_SINGLETON(BaseLib)
+const BaseLib * cgpBase = BaseLib::pointer();
 
 /*! @fn BaseLib::BaseLib(void)
  *
- * @brief BaseLib::BaseLib initializes the BaseLib class.
+ * @brief BaseLib::BaseLib() initializes the BaseLib class.
  */
 BaseLib::BaseLib(void)
     : ModuleInfo(MODULE_NAME)
     , mSystemEnvironment(QProcessEnvironment::systemEnvironment())
 {
     setVersion();
+
+    WARNNOT(connect(ModuleManager::pointer(), SIGNAL(executing()),
+                    this, SLOT(doExecute())));
+    WARNNOT(connect(ModuleManager::pointer(), SIGNAL(executing()),
+                    this, SLOT(doInitialize())));
 }
 
 QProcessEnvironment BaseLib::systemEnvironment(void) const
 {
     return mSystemEnvironment;
 }
-QString BaseLib::systemEnvironment(const QString & key) const
+
+QVariant BaseLib::systemEnvironmentValue(const QString & key,
+                                         const QVariant & defaultValue) const
 {
-    return mSystemEnvironment.value(key);
+#if 1
+    TRACE("key=<%1> defaultValue=<%2>", key, defaultValue);
+    QVariant value = mSystemEnvironment.value(key, defaultValue.toString());
+    bool contains = mSystemEnvironment.contains(key);
+    TRACE("contains=%1 value=<%2>", contains, value.toString());
+    return value;
+#else
+    return mSystemEnvironment.value(key, defaultValue);
+#endif
 }
 QStringList BaseLib::systemEnvironmentKeys(const QString & startsWith) const
 {
@@ -44,19 +66,32 @@ QStringList BaseLib::systemEnvironmentKeys(const QString & startsWith) const
     return rtn;
 }
 
-#if 0
-extern "C" BASESHARED_EXPORT void executeUnitTest(void)
+QString BaseLib::formatMessage(const QString & format,
+                               QVariantList vars)
 {
-    Base::instance()->executeUnitTest();
+    QString res = format;
+    int k = 0;
+    while ( ! vars.isEmpty())
+    {
+        QString key = QString("%%1").arg(++k);
+        res.replace(key,
+                    vars.takeFirst().toString());
+    }
+    return res;
 }
 
-/*! @fn void BaseLib::executeUnitTest(void)
- *
- * @internal
- */
-void BaseLib::executeUnitTest(void)
+void BaseLib::doExecute(void)
 {
-    QUT_FUNCTION();
-    //QUT_EXPECTEQ(VER_MAJOR, Base::instance()->version().getMajor());
+    TRACE("We're %1", "here!");
 }
-#endif
+
+void BaseLib::doInitialize(void)
+{
+    TRACE("We're %1", "there!");
+//    TESTOBJ(BasicKeyTest);
+    BasicIdTest bit;
+    BasicKeyTest bkt;
+    TestObject::execAll();
+    TODO("RUN_TEST macros")
+}
+

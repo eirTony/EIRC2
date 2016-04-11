@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       -= gui
+QT       += testlib
 
 TARGET = eirBase
 TEMPLATE = lib
@@ -15,21 +16,20 @@ include (../common.pri)
 
 win32:RC_FILE = WinRes.rc
 
-#LIBS *= -leirBjut
-
 SOURCES += BaseLib.cpp \
     ModuleInfo.cpp \
     VersionInfo.cpp \
-#    BaseLog.cpp \
     BasicName.cpp \
-    FunctionInfo.cpp \
-    FunctionMap.cpp \
-    FileLinePair.cpp \
     PluginObject.cpp \
     AbstractPlugin.cpp \
     BasicId.cpp \
     MetaName.cpp \
-    BasicKey.cpp
+    BasicKey.cpp \
+    ./_internal/DiagnosticItem.cpp \
+    ./_internal/ModuleManager.cpp \
+    BasicKeySegment.cpp \
+    BasicKeyManager.cpp \
+    TestObject.cpp
 
 HEADERS += BaseLib.h\
         base_global.h \
@@ -38,18 +38,20 @@ HEADERS += BaseLib.h\
     Version.h \
     ../../../CommonVersion.h \
     ../type/CProperty.h \
-#    BaseLog.h \
     BasicName.h \
-    FunctionInfo.h \
-    FunctionMap.h \
-    FileLinePair.h \
     BasicNameMap.h \
     BasicNameHash.h \
     PluginObject.h \
     AbstractPlugin.h \
     BasicId.h \
     MetaName.h \
-    BasicKey.h
+    BasicKey.h \
+    ./_internal/DiagnosticItem.h \
+    Diagnostic.h \
+    ./_internal/ModuleManager.h \
+    BasicKeySegment.h \
+    BasicKeyManager.h \
+    TestObject.h
 
 unix {
     target.path = /usr/lib

@@ -3,10 +3,10 @@
 Success::Success(void) {;}
 Success::Success(const bool yes) : mSuccess(yes) , mIsInitialized(true) {;}
 
-bool Success::yes(void)
+void Success::set(const bool isTrue)
 {
     mIsInitialized = true;
-    return mSuccess = true;
+    mSuccess = isTrue;
 }
 
 bool Success::is(void) const
@@ -14,19 +14,25 @@ bool Success::is(void) const
     return mIsInitialized ? mSuccess : false;
 }
 
+bool Success::yes(void)
+{
+    set(true);
+    return is();
+}
+
 bool Success::no(void)
 {
-    mIsInitialized = true;
-    return mSuccess = false;
+    set(false);
+    return is();
+}
+
+bool Success::expect(const bool isTrue)
+{
+    if (mIsInitialized) mSuccess &= isTrue;
+    return is();
 }
 
 Success::operator bool (void) const
 {
     return is();
-}
-
-void Success::set(const bool is)
-{
-    mIsInitialized = true;
-    mSuccess = is;
 }

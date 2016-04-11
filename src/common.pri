@@ -1,5 +1,5 @@
 # file: ./src/common.pri
-message("In ./src/common.pri")
+#message("In ./src/common.pri")
 
 #SRCDIR = $$(PWD)
 #BASEDIR = $$dirname($$SRCDIR)
@@ -21,7 +21,11 @@ else {
 INCLUDEPATH *= ../../../lib/core
 INCLUDEPATH *= ../../../lib/support
 INCLUDEPATH *= ../../../lib/worker
+INCLUDEPATH *= ../../../lib/third
 INCLUDEPATH *= ../../..
 DEFINES *= QT_USE_QSTRINGBUILDER
+DEFINES *= BUILD_TEST
 QMAKE_CXXFLAGS *= -std=c++11
 
+!win32:VERSION = 2.4.1
+# How to set from CommonVersion.h?

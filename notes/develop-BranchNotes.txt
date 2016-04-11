@@ -1,5 +1,12 @@
 * Branch Notes for 'develop' main branch
 
+= 2015-12-11 v2.03A aho
+-- Emphasis on EclipseStateMachine in Support-level libraries (in progress)
+-- Linux (Ubuntu 1410.3 LTS) support added
+-- BasicKey|Name|Id implemented
+-- Singlton pattern improved and standardized (in progress)
+-- Starting focus on interfacing with Qt Cloud Services
+
 = 2015-07-03 v2.03A aho
 -- Cleanup compile/link merge issues
 

@@ -46,7 +46,7 @@ void VersionInfo::setAll(void)
     setCompany(VER_COMPANY);
 #endif
 #ifdef __MODULE__
-    setCompany(__MODULE__);
+    setModuleName(__MODULE__);
 #endif
 #ifdef VER_ORGNAME
     setOrgName(VER_ORGNAME);

@@ -27,10 +27,8 @@ public slots:
     void start(void);
 
 protected:
-    virtual void doInitialize(BasicName::VariantMap init
-                                =BasicName::VariantMap()) = 0;
-    virtual void doSetup(BasicId::VariantMap config
-                                =BasicId::VariantMap()) = 0;
+    virtual void doInitialize(void) = 0;
+    virtual void doSetup(void) = 0;
     virtual void doStart(void) = 0;
 
 private:

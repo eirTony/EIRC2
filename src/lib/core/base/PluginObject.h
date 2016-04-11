@@ -4,12 +4,12 @@
 #include "BaseLib.h"
 
 #include <QPluginLoader>
-#include "ModuleInfo.h"
+//#include "ModuleInfo.h"
 
 #include <QObject>
-#include <QString.h>
+#include <QString>
 
-class PluginObject : public QPluginLoader, public ModuleInfo
+class BASESHARED_EXPORT PluginObject : public QPluginLoader /* , public ModuleInfo */
 {
     Q_OBJECT
 

@@ -2,20 +2,15 @@
 #define BASEKII_H
 #include "KiiLib.h"
 
-#include "BaseId.h"
-#include "BaseInfo.h"
-#include "BaseKey.h"
+#include "Id.h"
+#include "Info.h"
+#include "Key.h"
 class BaseIdBehavior;
 class BaseInfoBehavior;
 class BaseKeyBehavior;
 
 class BaseKiiItem
 {
-public:
-    typedef BaseKey  Key;
-    typedef BaseId   Id;
-    typedef BaseInfo Info;
-
 public:
     BaseKiiItem(void); // Null
 
@@ -28,9 +23,9 @@ private:
     BaseKeyBehavior  * mpKeyBehavior  = 0;
     BaseIdBehavior   * mpIdBehavior   = 0;
     BaseInfoBehavior * mpInfoBehavior = 0;
-    BaseKey  mKey;
-    BaseId   mId;
-    BaseInfo mInfo;
+    Key  mKey;
+    Id   mId;
+    Info mInfo;
 };
 
 #endif // BASEKII_H

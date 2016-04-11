@@ -22,14 +22,7 @@ SOURCES += ExeLib.cpp \
     StandardIO.cpp \
     StandardStream.cpp \
     BaseSerialStream.cpp \
-    CommandLineOption.cpp \
-    CommandLineProcessing.cpp \
-    CommandLineResult.cpp \
-    CommandLineOptions.cpp \
-    ArgumentSourcePair.cpp \
-    PluginManager.cpp \
-    ArgumentElement.cpp \
-    UnitTestConsole.cpp
+    PluginManager.cpp 
 
 HEADERS += ExeLib.h \
     Exe_global.h \
@@ -41,14 +34,7 @@ HEADERS += ExeLib.h \
     StandardIO.h \
     StandardStream.h \
     BaseSerialStream.h \
-    CommandLineOption.h \
-    CommandLineProcessing.h \
-    CommandLineResult.h \
-    CommandLineOptions.h \
-    ArgumentSourcePair.h \
-    PluginManager.h \
-    ArgumentElement.h \
-    UnitTestConsole.h
+    PluginManager.h 
 
 unix {
     target.path = /usr/lib

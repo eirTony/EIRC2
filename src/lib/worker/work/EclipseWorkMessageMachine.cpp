@@ -1,45 +1,47 @@
 #include "EclipseWorkMessageMachine.h"
-
+#if 1
 #include <state/EclipseStateMachine.h>
 #include <msg/EclipseMessageQueue.h>
 
 EclipseWorkMessageMachine::EclipseWorkMessageMachine(QObject * parent)
     : QObject(parent)
+    , cmpMachine(new EclipseStateMachine(this))
+    , cmpQueue(new EclipseMessageQueue(this))
+
 {
-    mpMachine = new EclipseStateMachine(this);
-    mpQueue = new EclipseMessageQueue(this);
-    Q_ASSERT(mpMachine);
-    Q_ASSERT(mpQueue);
+    Q_ASSERT(cmpMachine);
+    Q_ASSERT(cmpQueue);
 }
 
 bool EclipseWorkMessageMachine::initialize(const BasicName::VariantMap & init)
 {
     bool success = true;
-    success |= mpMachine->initialize(init);
-    success |= mpQueue->initialize(init);
+    // success |= mpMachine->initialize(init);
+    // success |= mpQueue->initialize(init);
     return success;
 }
 
-bool EclipseWorkMessageMachine::configure(const BasicId::VariantMap & config)
+bool EclipseWorkMessageMachine::configure(const Configuration & config)
 {
     bool success = true;
-    StateMachineConfiguration cfg(config);
-    success |= mpMachine->configure(cfg);
-    success |= mpQueue->configure(config);
+    Configuration cfg(config);
+    // success |= mpMachine->configure(cfg);
+    // success |= mpQueue->configure(config);
     return success;
 }
 
-EclipseStateMachine * EclipseWorkMessageMachine::machine(void) const
+const EclipseStateMachine * EclipseWorkMessageMachine::machine(void) const
 {
-    return mpMachine;
+    return cmpMachine;
 }
 
-EclipseMessageQueue * EclipseWorkMessageMachine::queue(void) const
+const EclipseMessageQueue * EclipseWorkMessageMachine::queue(void) const
 {
-    return mpQueue;
+    return cmpQueue;
 }
 
 void EclipseWorkMessageMachine::start(void)
 {
-    mpMachine->start();
+    // mpMachine->start();
 }
+#endif

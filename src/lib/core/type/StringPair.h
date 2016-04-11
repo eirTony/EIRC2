@@ -2,20 +2,20 @@
 #define STRINGPAIR_H
 #include "TypeLib.h"
 
-#include "QQPair.h"
-#include "QQString.h"
+#include <QPair>
+#include <QString>
 
-class TYPESHARED_EXPORT StringPair : public QQPair<QQString, QQString>
+class TYPESHARED_EXPORT StringPair : public QPair<QString, QString>
 {
 public:
-    typedef QQPair<QQString, QQString> Base;
+    typedef QPair<QString, QString> Base;
 
 public:
     StringPair(void);
-    StringPair(const QQString & first,
-               const QQString & second);
-    QQString first(void)  const;
-    QQString second(void) const;
+    StringPair(const QString & first,
+               const QString & second);
+    QString first(void)  const;
+    QString second(void) const;
 };
 
 #endif // STRINGPAIR_H

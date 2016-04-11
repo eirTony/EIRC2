@@ -4,7 +4,12 @@
 #include "ModuleInfo.h"
 
 #include <QtDebug>
+
 #include <QStringList>
+#include <QTimer>
+
+#include "Diagnostic.h"
+#include "_internal/ModuleManager.h"
 
 /*! @class ModuleInfo
  *
@@ -14,7 +19,7 @@
  * that are available within the other libraries or applicaitons.
  */
 
-QMap<QString, ModuleInfo *> ModuleInfo::smName_p_map;
+ModuleInfo::ModuleInfo(void) {;}
 
 /*! @fn ModuleInfo::ModuleInfo(const QString & name)
  *
@@ -26,9 +31,15 @@ QMap<QString, ModuleInfo *> ModuleInfo::smName_p_map;
  */
 ModuleInfo::ModuleInfo(const QString & name)
     : mName(name)
+    , mpManager(ModuleManager::pointer())
 {
-    smName_p_map.insert(name, this);
+    Q_ASSERT(mpManager);
+    mpManager->muster(this);
 }
+
+ModuleInfo::ModuleInfo(QObject * parent)
+    : QObject(parent) {;}
+
 
 bool ModuleInfo::isNull(void) const
 {
@@ -48,7 +59,7 @@ bool ModuleInfo::isNull(void) const
  */
 void ModuleInfo::setVersion(void)
 {
-    m_vi.setAll();
+    mVI.setAll();
 }
 
 /*! @fn QString ModuleInfo::name(void) const
@@ -69,30 +80,14 @@ QString ModuleInfo::name(void) const
  */
 VersionInfo ModuleInfo::version(void) const
 {
-    return m_vi;
+    return mVI;
 }
 
-/*! @fn QStringList ModuleInfo::moduleNames(void) // static
- * @brief ModuleInfo::moduleNames
- * @return QStringList module names
- *
- * Returns each of the names of the modules that have
- * been created in this process.
- */
-QStringList ModuleInfo::moduleNames(void) // static
-{
-    return smName_p_map.keys();
-}
-
-/*! @fn void ModuleInfo::debugVersions(void) // static
- * @internal
- * @brief ModuleInfo::debugVersions writes to QtDebug for each registered library.
- */
-void ModuleInfo::debugVersions(void) // static
-{
-    foreach (ModuleInfo * p, smName_p_map.values())
-        qDebug() << QString("%1 - %2 [%3]")
-                    .arg(p->name(), 16)
-                    .arg(p->version().toString(false))
-                    .arg(p->version().toQWord(), 16, 16);
-}
+void ModuleInfo::doConstruct(void) {TRACE("in ModuleInfo::%1() for %2", "doConstruct", mName);}
+void ModuleInfo::doExecute(void) {TRACE("in ModuleInfo::for %2", "doExecute", mName);}
+void ModuleInfo::doTest(void) {TRACE("in ModuleInfo::for %2", "doTest", mName);}
+void ModuleInfo::doInitialize(void) {TRACE("in ModuleInfo::for %2", "doInitialize", mName);}
+void ModuleInfo::doConfigure(void) {TRACE("in ModuleInfo::for %2", "doConfigure", mName);}
+void ModuleInfo::doStart(void) {TRACE("in ModuleInfo::for %2", "doStart", mName);}
+void ModuleInfo::doStop(void) {TRACE("in ModuleInfo::for %2", "doStop", mName);}
+void ModuleInfo::doQuit(void) {TRACE("in ModuleInfo::for %2", "doQuit", mName);}

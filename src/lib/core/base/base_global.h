@@ -10,6 +10,7 @@
 #else
 #  define BASESHARED_EXPORT Q_DECL_IMPORT
 #endif
-#define MODULE_NAME "eirBase"
-
+#ifndef MODULE_NAME
+# define MODULE_NAME "eirBase"
+#endif
 #endif // BASE_GLOBAL_H

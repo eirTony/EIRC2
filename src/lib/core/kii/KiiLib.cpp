@@ -6,7 +6,8 @@
 
 #include <QtDebug>
 
-KiiLib * gpKid = &(Kii::instance());
+DEFINE_SINGLETON(KiiLib)
+const KiiLib * cgpKii = KiiLib::pointer();
 
 /*! @fn KiiLib::KiiLib(void)
  *
@@ -17,28 +18,3 @@ KiiLib::KiiLib(void)
 {
     setVersion();
 }
-
-#if 0
-/*! @fn void executeUnitTest(void)
- *
- * @brief The executeUnitTest() function is global to KiiLib
- *
- * This global extern "C" function can be resolved and executed
- * after being loaded via QLibrary.
- */
-extern "C" KIISHARED_EXPORT void executeUnitTest(void)
-{
-    Kid::instance()->executeUnitTest();
-}
-
-/*! @fn void KiiLib::executeUnitTest(void)
- *
- * @internal
- */
-void KiiLib::executeUnitTest(void)
-{
-    QUT_FUNCTION();
-    QUT_EXPECTEQ(VER_MAJOR, Kid::instance()->version().getMajor());
-    //QUT_INSTANCE(AnyOtherClasses);
-}
-#endif

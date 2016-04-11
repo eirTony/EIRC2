@@ -6,7 +6,8 @@
 
 #include <QtDebug>
 
-DataLib * gpData = &(Data::instance());
+DEFINE_SINGLETON(DataLib)
+const DataLib * cgpData = DataLib::pointer();
 
 /*! @fn DataLib::DataLib(void)
  *
@@ -17,28 +18,3 @@ DataLib::DataLib(void)
 {
     setVersion();
 }
-
-#if 0
-/*! @fn void executeUnitTest(void)
- *
- * @brief The executeUnitTest() function is global to DataLib
- *
- * This global extern "C" function can be resolved and executed
- * after being loaded via QLibrary.
- */
-extern "C" DATASHARED_EXPORT void executeUnitTest(void)
-{
-    Data::instance()->executeUnitTest();
-}
-
-/*! @fn void DataLib::executeUnitTest(void)
- *
- * @internal
- */
-void DataLib::executeUnitTest(void)
-{
-    QUT_FUNCTION();
-    QUT_EXPECTEQ(VER_MAJOR, Data::instance()->version().getMajor());
-    //QUT_INSTANCE(AnyOtherClasses);
-}
-#endif

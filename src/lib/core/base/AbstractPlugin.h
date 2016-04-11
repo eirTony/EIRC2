@@ -4,7 +4,7 @@
 #define ABSTRACTPLUGIN_H
 #include "BaseLib.h"
 
-#include "ModuleInfo.h"
+//#include "ModuleInfo.h"
 
 #include <QFileInfo>
 #include <QList>
@@ -13,7 +13,7 @@
 #include <QUrlQuery>
 #include <QString>
 
-#include <type/CharCode.h>
+//#include <type/CharCode.h>
 
 #include "BasicName.h"
 #include "BasicId.h"
@@ -21,7 +21,7 @@
 
 class QPluginLoader;
 
-class BASESHARED_EXPORT AbstractPlugin : public ModuleInfo
+class BASESHARED_EXPORT AbstractPlugin // : public ModuleInfo
 {
 public:
     bool load(const BasicId & id,
@@ -44,8 +44,8 @@ public:
 
 protected:
     AbstractPlugin(const BasicId & prefix,
-                   const BasicName & name,
-                   const EightCCList & schemata,
+                   const BasicName & name, /*
+                   const EightCCList & schemata, */
                    const MetaName & meta=MetaName());
     QObject * instance(void) const;
 
@@ -63,7 +63,7 @@ private:
 private: // static
     friend class PluginManager;
     static QList<BasicId> smPrefixIdList;
-    static QMap<EightCC, BasicId> smSchemaPluginIdMap;
+//    static QMap<EightCC, BasicId> smSchemaPluginIdMap;
     static QMap<BasicId, QFileInfo> smPluginIdFileInfoMap;
     static QMap<BasicId, MetaName> smPluginIdMetaNameMap;
 };

@@ -1,0 +1,5 @@
+
+THIRDLIBDIR = ..
+
+include (../common.pri)
+

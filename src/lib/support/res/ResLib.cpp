@@ -6,7 +6,8 @@
 
 #include <QtDebug>
 
-ResLib * gpRes = &(Res::instance());
+DEFINE_SINGLETON(ResLib)
+const ResLib * cgpRes = ResLib::pointer();
 
 /*! @fn ResLib::ResLib(void)
  *
@@ -17,28 +18,3 @@ ResLib::ResLib(void)
 {
     setVersion();
 }
-
-#if 0
-/*! @fn void executeUnitTest(void)
- *
- * @brief The executeUnitTest() function is global to ResLib
- *
- * This global extern "C" function can be resolved and executed
- * after being loaded via QLibrary.
- */
-extern "C" RESSHARED_EXPORT void executeUnitTest(void)
-{
-    Res::instance()->executeUnitTest();
-}
-
-/*! @fn void ResLib::executeUnitTest(void)
- *
- * @internal
- */
-void ResLib::executeUnitTest(void)
-{
-    QUT_FUNCTION();
-    QUT_EXPECTEQ(VER_MAJOR, Res::instance()->version().getMajor());
-    //QUT_INSTANCE(AnyOtherClasses);
-}
-#endif

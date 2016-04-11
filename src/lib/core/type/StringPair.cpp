@@ -2,16 +2,16 @@
 
 StringPair::StringPair(void) {}
 
-StringPair::StringPair(const QQString & first,
-                       const QQString & second)
+StringPair::StringPair(const QString & first,
+                       const QString & second)
     : Base(first, second) {}
 
-QQString StringPair::first(void)  const
+QString StringPair::first(void)  const
 {
     return first();
 }
 
-QQString StringPair::second(void) const
+QString StringPair::second(void) const
 {
     return second();
 }

@@ -8,5 +8,7 @@
 #else
 #  define DATASHARED_EXPORT Q_DECL_IMPORT
 #endif
-
+#ifndef MODULE_NAME
+# define MODULE_NAME "eirData"
+#endif
 #endif // EMPTY_GLOBAL_H

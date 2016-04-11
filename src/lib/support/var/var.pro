@@ -1,3 +1,8 @@
+#-------------------------------------------------
+#
+# Project created by QtCreator 2016-02-02T00:14:33
+#
+#-------------------------------------------------
 
 QT       -= gui
 
@@ -13,18 +18,15 @@ win32:RC_FILE = WinRes.rc
 LIBS *= -leirBase
 
 SOURCES += VarLib.cpp \
-    VariableMap.cpp
+    VariableMap.cpp \
+    VariablePack.cpp
 
-HEADERS += VarLib.h \
-    Version.h \
-    ../../../CommonVersion.h \
-    VariableMap.h
+HEADERS += VarLib.h\
+        var_global.h \
+    VariableMap.h \
+    VariablePack.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
-
-OTHER_FILES += \
-    WinRes.rc \
-    ../../../CommonWinRes.rc

@@ -6,7 +6,8 @@
 
 #include <QtDebug>
 
-//WorkLib * gpWork = Work::instance();
+DEFINE_SINGLETON(WorkLib)
+const WorkLib * cgpWork = WorkLib::pointer();
 
 /*! @fn WorkLib::WorkLib(void)
  *

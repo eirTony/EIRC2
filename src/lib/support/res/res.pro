@@ -12,12 +12,14 @@ win32:RC_FILE = WinRes.rc
 
 LIBS *= -leirBase
 
-SOURCES += ResLib.cpp
+SOURCES += ResLib.cpp \
+    Result.cpp
 
 HEADERS += ResLib.h \
     res_global.h \
     Version.h \
-    ../../../CommonVersion.h
+    ../../../CommonVersion.h \
+    Result.h
 
 unix {
     target.path = /usr/lib

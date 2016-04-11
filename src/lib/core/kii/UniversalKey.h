@@ -2,7 +2,7 @@
 #define UNIVERSALKEY_H
 #include "KiiLib.h"
 
-#include <QList.h>
+#include <QList>
 
 #include <type/Unsigned.h>
 

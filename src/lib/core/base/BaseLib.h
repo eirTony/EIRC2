@@ -11,27 +11,29 @@
  */
 
 #include <QProcessEnvironment>
+#include <QStringList>
+#include <QVariant>
 
 #include <core/Singleton.h>
 #include "ModuleInfo.h"
 
 typedef void * VoidPtr;
 
-/*! @class BaseLib
- * @brief The BaseLib is the base class in the eirBase library.
- *
- * The BaseLib contains any classes that would cause a
- * circular dependency in the foundations libraries above.
- *
- */
 class BASESHARED_EXPORT BaseLib : public ModuleInfo
 {
+    DECLARE_SINGLETON(BaseLib) // ctor & more
 public:
-    BaseLib(void);
-//    virtual void executeUnitTest(void);
     QProcessEnvironment systemEnvironment(void) const;
-    QString systemEnvironment(const QString & key) const;
+    QVariant systemEnvironmentValue(const QString & key,
+                               const QVariant &defaultValue=QVariant()) const;
     QStringList systemEnvironmentKeys(const QString & startsWith=QString()) const;
+
+public: // static
+    static QString formatMessage(const QString & format,
+                                 QVariantList vars);
+public: // virtual
+    virtual void doExecute(void);
+    virtual void doInitialize(void);
 
 private:
     QProcessEnvironment mSystemEnvironment;
@@ -41,15 +43,9 @@ private:
  * @ingroup BaseLib
  * @since BaseLib was started in v2.02
  * @remark { Note: As with all library class files,
- * BaseLib is implemented as a staticSingleton
+ * BaseLib is implemented as a Singleton
  * and is used to provide static constructors
  * needed for its classes. }
- */
-
-typedef StaticSingleton<BaseLib> Base;
-/*! @typedef Base
- *
- * @brief Is the StaticSingleton instance of BaseLib
  */
 
 #endif // BASELIB_H

@@ -17,52 +17,26 @@ LIBS *= -leirBase
 
 SOURCES += TypeLib.cpp \
     MillisecondTime.cpp \
-    QQString.cpp \
-    QQRegularExpression.cpp \
-    QQChar.cpp \
-    QQVariant.cpp \
-    QQStringList.cpp \
     StringPair.cpp \
-    QQList.cpp \
-    QQUrl.cpp \
-    QQDir.cpp \
-    QQFile.cpp \
-    QQDataStream.cpp \
-    QQTextStream.cpp \
-    QQFileInfo.cpp \
-    QQQueue.cpp \
-    ../../../Success.cpp \
-    QQState.cpp \
-    QQStateMachine.cpp \
-    Boolean.cpp
+    Success.cpp \
+    Boolean.cpp \
+    NibbleArray.cpp \
+    QQBitArray.cpp
 
 HEADERS += TypeLib.h\
     type_global.h \
     MillisecondTime.h \
     CProperty.h \
     DProperty.h \
-    QQString.h \
-    QQRegularExpression.h \
     CharCode.h \
-    QQChar.h \
-    QQVariant.h \
-    QQStringList.h \
     StringPair.h \
-    QQPair.h \
-    QQList.h \
     CharCode.h \
     Unsigned.h \
-    QQUrl.h \
-    QQDir.h \
-    QQFile.h \
-    QQDataStream.h \
-    QQTextStream.h \
-    QQFileInfo.h \
-    QQQueue.h \
-    ../../../Success.h \
-    QQState.h \
-    QQStateMachine.h \
-    Boolean.h
+    Success.h \
+    Boolean.h \
+    QQMap.h \
+    NibbleArray.h \
+    QQBitArray.h
 
 unix {
     target.path = /usr/lib

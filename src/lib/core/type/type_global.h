@@ -8,6 +8,7 @@
 #else
 #  define TYPESHARED_EXPORT Q_DECL_IMPORT
 #endif
-#define MODULE_NAME "eirType"
-
+#ifndef MODULE_NAME
+# define MODULE_NAME "eirType"
+#endif
 #endif // TYPE_GLOBAL_H

@@ -1,0 +1,4 @@
+HelloCloudConsole::doSetup(BasicId::VariantMap config) USE(config)
+
+HelloCloudConsole main() guts
+

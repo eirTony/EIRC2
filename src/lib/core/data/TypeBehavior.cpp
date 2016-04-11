@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QVector>
 
-#include <eirBase/BaseLog.h>
+#include <base/Diagnostic.h>
 
 QVector<int> TypeBehavior::size_digits_i_vec
     = QVector<int>() << -1 << 3 << 5 << 8 << 10 << 0 << 0 << 0 << 20;
@@ -19,30 +19,29 @@ TypeBehavior::TypeBehavior(void)
 
 QString TypeBehavior::readable(const QVariant & var)
 {
-    BASSERT(var.canConvert(QVariant::String));
+    CRITNOT(var.canConvert(QVariant::String));
     return var.toString();
 }
 
 QString TypeBehavior::sortable(const QVariant & var)
 {
-    BASSERT(var.canConvert(QVariant::String));
+    CRITNOT(var.canConvert(QVariant::String));
     return var.toString().toLower();
 }
 
 QStringList TypeBehavior::hexdump(const QVariant & var,
                             const QString & title)
 {
-    BFUNCTION(var, title);
-    (void)var;
-    (void)title;
-    BMUSTDO("hexdump()");
+    USE(var);
+    USE(title);
+    MUSTDO("hexdump()");
     return QStringList();
 }
 
 QString TypeBehavior::parsable(const QVariant & var)
 {
-    (void)var;
-    BMUSTDO("parsable()");
+    USE(var);
+    MUSTDO("parsable()");
     return QString();
 }
 
@@ -50,17 +49,17 @@ QString TypeBehavior::parsable(const QVariant & var)
 QVariant TypeBehavior::parsed(const int dtype,
                               const QString & s)
 {
-    (void)s;
-    (void)dtype;
-    BMUSTDO("parsed()");
+    USE(s);
+    USE(dtype);
+    NEEDDO("parsed()");
     return QVariant();
 }
 
 
 QDomElement TypeBehavior::domVariant(const QVariant & var)
 {
-    (void)var;
-    BMUSTDO("domVariant()");
+    USE(var);
+    MUSTDO("domVariant()");
     return QDomElement();
 }
 
@@ -68,9 +67,9 @@ QDomElement TypeBehavior::domVariant(const QVariant & var)
 QVariant TypeBehavior::variantDom(const int dtype,
                                   const QDomElement & de)
 {
-    (void)dtype;
-    (void)de;
-    BMUSTDO("variantDom()");
+    USE(dtype);
+    USE(de);
+    MUSTDO("variantDom()");
     return QVariant();
 }
 
@@ -78,9 +77,9 @@ QVariant TypeBehavior::variantDom(const int dtype,
 QStringList TypeBehavior::binaryEncoded(const int dtype,
                                         const QByteArray & ba)
 {
-    (void)dtype;
-    (void)ba;
-    BMUSTDO("binaryEncoded()");
+    USE(dtype);
+    USE(ba);
+    MUSTDO("binaryEncoded()");
     return QStringList();
 }
 
@@ -88,25 +87,25 @@ QStringList TypeBehavior::binaryEncoded(const int dtype,
 QByteArray TypeBehavior::binaryDecoded(const int dtype,
                                        const QStringList & qsl)
 {
-    (void)dtype;
+    USE(dtype);
     (void)qsl;
-    BMUSTDO("binaryDecoded()");
+    MUSTDO("binaryDecoded()");
     return QByteArray();
 }
 
 
 QByteArray TypeBehavior::baVariant(const QVariant & var)
 {
-    (void)var;
-    BMUSTDO("baVariant()");
+    USE(var);
+    MUSTDO("baVariant()");
     return QByteArray();
 }
 
 
 QVariant TypeBehavior::variantBA(const int dtype, const QByteArray & ba)
 {
-    (void)dtype;
-    (void)ba;
-    BMUSTDO("variantBA()");
+    USE(dtype);
+    USE(ba);
+    MUSTDO("variantBA()");
     return QVariant();
 }

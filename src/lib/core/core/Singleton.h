@@ -1,37 +1,51 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
-#include <QtDebug>
+/*! @file Singleton.h Macros for Singleton classes
+  *
+  * Usage:
+  *
+  * .h File
+  *
+  * @code
+  * class Log
+  * {
+  *     DECLARE_SINGLETON(Log)
+  *     // do NOT declare Log(void);
+  *     ...
+  * };
+  * @endcode
+  *
+  * .cpp File
+  * @code
+  * DEFINE_SINGLETON(Log)
+  *
+  * Log::Log(void)
+  * {
+  *     ...
+  * }
+  * @endcode
+  *
+  */
 
-#if 0
-template <class T> class PointerSingleton
-{
-public:
-    static T * instance(void)
-        { if (mpT) return mpT; return mpT = new T(); }
+// TODO: Non-void c'tor()
 
-protected:
-    PointerSingleton(void) {}
-    PointerSingleton(const T & rhs);
+#define DECLARE_SINGLETON(CLASS) \
+    protected: \
+        CLASS(void); \
+    public: \
+        static CLASS * pointer(void); \
+        static CLASS & reference(void); \
+    private: \
+        static CLASS * instance(void); \
+        static CLASS * smpClass; \
 
-private:
-    static T * mpT = 0;
-};
-#endif
+#define DEFINE_SINGLETON(CLASS) \
+    CLASS * CLASS::smpClass = 0; \
+    CLASS * CLASS::instance(void) \
+    { if ( ! smpClass) smpClass = new CLASS; return smpClass; } \
+    CLASS * CLASS::pointer(void) { return instance(); } \
+    CLASS & CLASS::reference(void) { return *instance(); } \
 
-template <class T> class StaticSingleton
-{
-public:
-    static T & instance(void)
-        { static T it; return it; }
-    static T * p(void)
-        { return &instance(); }
-    T & operator() (void) const
-        { return instance(); }
-
-protected:
-    StaticSingleton(void) {}
-    StaticSingleton(const T & rhs);
-};
 
 #endif // SINGLETON_H

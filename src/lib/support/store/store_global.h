@@ -1,0 +1,12 @@
+#ifndef STORELIB_GLOBAL_H
+#define STORELIB_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(STORELIB_LIBRARY)
+#  define STORELIBSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define STORELIBSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // STORELIB_GLOBAL_H

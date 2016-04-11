@@ -1,16 +1,18 @@
 #ifndef SUCCESS_H
 #define SUCCESS_H
+#include "TypeLib.h"
 
-class Success
+class TYPESHARED_EXPORT Success
 {
 public:
     Success(void);
     Success(const bool yes);
-    bool yes(void);
+    void set(const bool isTrue=true);
     bool is(void) const;
+    bool yes(void);
     bool no(void);
+    bool expect(const bool isTrue);
     operator bool (void) const;
-    void set(const bool is);
 
 private:
     bool mSuccess = false;

@@ -1,6 +1,6 @@
 #include "StandardIO.h"
 
-#include <QFile.h>
+#include <QFile>
 
 StandardIO::StandardIO(QObject * parent)
     : QIODevice(parent)

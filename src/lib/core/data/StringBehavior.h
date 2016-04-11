@@ -1,14 +1,14 @@
 #ifndef STRINGBEHAVIOR_H
 #define STRINGBEHAVIOR_H
-#include "eirType.h"
+#include "DataLib.h"
 
 #include "TypeBehavior.h"
 
-class EIRTYPESHARED_EXPORT StringBehavior : public TypeBehavior
+class DATASHARED_EXPORT StringBehavior : public TypeBehavior
 {
 public:
     StringBehavior(void);
-    StringBehavior(const intList metaTypes);
+    StringBehavior(const IntVector metaTypes);
     virtual QString sortable(const QVariant & var);
     virtual QStringList hexdump(const QVariant & var,
                                 const QString & title=QString());

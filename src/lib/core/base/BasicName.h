@@ -14,6 +14,7 @@ class BASESHARED_EXPORT BasicName
 public:
     typedef QList<BasicName> List;
     typedef QPair<BasicName, QVariant> VariantPair;
+    typedef QList<VariantPair> VariantPairList;
     typedef QMap<BasicName, QVariant> VariantMap;
     // HOWTO: template <class T> typedef QMap<BasicName, T> Map;
 
@@ -24,16 +25,20 @@ public:
     bool isNull(void) const;
     bool isEmpty(void) const;
     void clear(void);
+    int size(void) const;
     void set(const QString & name);
     QString sortable(void) const;
     bool operator == (const BasicName & other) const;
     bool operator <  (const BasicName & other) const;
     QString operator () (void) const;
     operator QString (void) const;
+    operator int (void) const;
 
 private:
     QString mName;
+    const static QString csmAllowedChars;
 };
+Q_DECLARE_METATYPE(BasicName)
 /*! @class BasicName BasicName.h <base/BasicName.h>
  * @brief The BasicName class supports names that mirror programming variable names
  * @ingroup BaseLib

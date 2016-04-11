@@ -1,12 +1,14 @@
-#ifndef EMPTY_GLOBAL_H
-#define EMPTY_GLOBAL_H
+#ifndef KII_GLOBAL_H
+#define KII_GLOBAL_H
 
 #include <QtCore/qglobal.h>
 
-#if defined(KID_LIBRARY)
+#if defined(KII_LIBRARY)
 #  define KIISHARED_EXPORT Q_DECL_EXPORT
 #else
 #  define KIISHARED_EXPORT Q_DECL_IMPORT
 #endif
-
-#endif // EMPTY_GLOBAL_H
+#ifndef MODULE_NAME
+# define MODULE_NAME "eirKii"
+#endif
+#endif // KII_GLOBAL_H

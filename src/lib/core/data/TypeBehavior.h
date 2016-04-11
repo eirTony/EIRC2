@@ -3,13 +3,17 @@
 */
 #ifndef TYPEBEHAVIOR_H
 #define TYPEBEHAVIOR_H
-#include "TypeLib.h"
+#include "DataLib.h"
+
+#include <QVector>
 
 #include "DataType.h"
 
 class QDomElement;
 
-class TYPESHARED_EXPORT TypeBehavior
+typedef QVector<int> IntVector;
+
+class DATASHARED_EXPORT TypeBehavior
 {
 public:
     virtual QString readable(const QVariant & var);
@@ -32,7 +36,7 @@ public:
 
 protected:
     TypeBehavior(void);
-    static intVector size_digits_i_vec;
+    static IntVector size_digits_i_vec;
 };
 
 #endif // TYPEBEHAVIOR_H

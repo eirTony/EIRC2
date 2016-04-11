@@ -3,10 +3,11 @@
 #include "MsgLib.h"
 
 #include <QObject>
+#include <QQueue>
 
 #include <base/BasicId.h>
 #include <base/BasicName.h>
-#include <type/QQQueue.h>
+#include <cfg/Configuration.h>
 
 #include "EclipseMessage.h"
 
@@ -16,8 +17,8 @@ class MSGSHARED_EXPORT EclipseMessageQueue : public QObject
 public:
     explicit EclipseMessageQueue(QObject * parent=0);
     bool initialize(const BasicName::VariantMap init=BasicName::VariantMap());
-    bool configure(const BasicId::VariantMap config
-                                =BasicId::VariantMap());
+    bool configure(const Configuration config
+                                =Configuration());
 
 signals:
     void outgoing(const EclipseMessage & msg);
@@ -29,7 +30,7 @@ public slots:
     void send(const EclipseMessage & msg);
 
 private:
-    QQQueue<EclipseMessage> mQueue;
+    QQueue<EclipseMessage> mQueue;
     QObject * mpCurrentSenderObject = 0;
     EclipseMessage mCurrentMessage;
 };

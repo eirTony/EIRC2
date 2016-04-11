@@ -19,6 +19,9 @@ TEMPLATE = app
 
 LIBS    *= -leirBase
 LIBS    *= -leirType
+LIBS    *= -leirKii
+LIBS    *= -leirVar
+LIBS    *= -leirCfg
 LIBS    *= -leirExe
 LIBS    *= -leirMsg
 LIBS    *= -leirState

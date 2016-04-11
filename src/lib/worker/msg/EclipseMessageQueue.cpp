@@ -13,7 +13,7 @@ bool EclipseMessageQueue::initialize(const BasicName::VariantMap init)
     return false;
 }
 
-bool EclipseMessageQueue::configure(const BasicId::VariantMap config)
+bool EclipseMessageQueue::configure(const Configuration config)
 {
     return false;
 }

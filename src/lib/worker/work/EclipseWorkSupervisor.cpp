@@ -2,7 +2,7 @@
 
 #include "EclipseWorkMessageMachine.h"
 
-EclipseWorkSupervisor::EclipseWorkSupervisor(EclipseWorkMessageMachine * boss)
+EclipseWorkSupervisor::EclipseWorkSupervisor(QObject *boss)
     : QObject(boss)
 {
 }

@@ -1,4 +1,6 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    ConsoleUno
+#    ConsoleUno \
+    HelloCloudConsole \
+    HelloCloudMachine

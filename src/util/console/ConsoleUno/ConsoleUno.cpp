@@ -8,29 +8,34 @@
 
 #include <QTimer>
 
+#include <base/Diagnostic.h>
 #include <msg/EclipseMessage.h>
 #include <msg/EclipseMessageQueue.h>
 #include <state/EclipseStateMachine.h>
 #include <work/EclipseWorkMessageMachine.h>
 
 ConsoleUno::ConsoleUno(void)
-    : mpEWMM(new EclipseWorkMessageMachine(this))
+    : mpMachine(new EclipseWorkMessageMachine(this))
 {
     setVersion();
     QObject::setObjectName("ConsoleUno");
 }
 
-void ConsoleUno::doInitialize(BasicName::VariantMap init)
+void ConsoleUno::doInitialize(void)
 {
-    mpEWMM->initialize(init);
+    TRACE("Initializing ConsoleUno %1",
+          QDateTime::currentDateTime().toString());
+    mpMachine->initialize(ExecutableSupport::initialization());
+    CRITIF(true, "This should also show");
     connect(this, SIGNAL(send(const EclipseMessage &)),
-            mpEWMM->queue(), SLOT(incoming(const EclipseMessage &)));
-    connect(mpEWMM->queue(), SIGNAL(outgoing(const EclipseMessage &)),
+            mpMachine->queue(), SLOT(incoming(const EclipseMessage &)));
+    connect(mpMachine->queue(), SIGNAL(outgoing(const EclipseMessage &)),
             this, SLOT(receive(const EclipseMessage &)));
 }
 
-void ConsoleUno::doSetup(BasicId::VariantMap config)
+void ConsoleUno::doSetup(void)
 {
+    mpMachine->configure(ExecutableSupport::configuration());
 }
 
 void ConsoleUno::doStart(void)

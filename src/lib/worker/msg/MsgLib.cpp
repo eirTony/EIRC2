@@ -6,22 +6,8 @@
 
 #include <QtDebug>
 
-//#include <quick/QuickUnitTest.h>
-
-//MsgLib * gpMsg = Msg::instance();
-/*! @fn void executeUnitTest(void)
- *
- * @brief The executeUnitTest() function is global to MsgLib
- *
- * This global extern "C" function can be resolved and executed
- * after being loaded via QLibrary.
- */
-/*
-extern "C" MSGSHARED_EXPORT void executeUnitTest(void)
-{
-    Msg::instance()->executeUnitTest();
-}
-*/
+DEFINE_SINGLETON(MsgLib)
+const MsgLib * cgpMsg = MsgLib::pointer();
 
 /*! @fn MsgLib::MsgLib(void)
  *
@@ -32,16 +18,3 @@ MsgLib::MsgLib(void)
 {
     setVersion();
 }
-
-/*! @fn void MsgLib::executeUnitTest(void)
- *
- * @internal
- */
-/*
-void MsgLib::executeUnitTest(void)
-{
-    QUT_FUNCTION();
-    QUT_EXPECTEQ(VER_MAJOR, Msg::instance()->version().getMajor());
-    //QUT_INSTANCE(AnyOtherClasses);
-}
-*/

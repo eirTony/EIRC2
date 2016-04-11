@@ -2,10 +2,10 @@
 
 #include <QDomElement>
 
-#include <eirBase/BaseLog.h>
-#include <eirKID/BasicId.h>
+#include <base/Diagnostic.h>
+#include <base/BasicId.h>
 
-#include "Hexdump.h"
+//#include "Hexdump.h"
 
 StringBehavior * StringBehavior::instance_p = 0;
 
@@ -21,46 +21,36 @@ StringBehavior::StringBehavior(void)
 
 QString StringBehavior::sortable(const QVariant & var)
 {
-    BFUNCTION(var);
-    QString result(var.toString().toLower());
-    BFNRETURN(result);
-    return result;
+    return var.toString().toLower();
 }
 
 QStringList StringBehavior::hexdump(const QVariant & var,
                                      const QString & title)
 {
-    BFUNCTION(var, title);
+    USE(title);
     QString s = var.toString();
     QByteArray ba = s.toLocal8Bit();
-    QStringList result(Hexdump::from(ba, title));
-    BFNRETURN(result);
-    return result;
+    TODO("QStringList result(Hexdump::from(ba, title));");
+    return QStringList();
 }
 
 QString StringBehavior::parsable(const QVariant & var)
 {
-    BFUNCTION(var);
-    QString result = QString("%1 %2")
+    return QString("%1 %2")
             .arg(DataType::name(QMetaType::type("BasicId")))
             .arg(var.toString());
-    BFNRETURN(result);
-    return result;
 }
 
 QVariant StringBehavior::parsed(const QString & s)
 {
-    BFUNCTION(s);
     QString is = s.simplified();
     int x = is.indexOf(' ');
     if (x > 0) is = is.mid(x+1);
-    BFNRETURN(is);
     return QVariant(is);
 }
 
 QDomElement StringBehavior::domVariant(const QVariant & var)
 {
-    BFUNCTION(var);
     QDomDocument tempDoc;
     QDomElement result = tempDoc.createElement(DataType::elementTag_s);
     result.setAttribute(DataType::attribute_s,
@@ -68,16 +58,13 @@ QDomElement StringBehavior::domVariant(const QVariant & var)
     QString text = var.toString();
     QDomText textNode = result.ownerDocument().createTextNode(text);
     result.appendChild(textNode);
-    BFNRETURN(result.text());
     return result;
 }
 
 QVariant StringBehavior::variantDom(const QDomElement & de)
 {
-    BFUNCTION(de.text());
-    BEXPECTEQ(QMetaType::typeName(QMetaType::type("BasicId")),
-                  de.attribute(DataType::attribute_s));
+    WARNNOT(QMetaType::typeName(QMetaType::type("BasicId"))
+                  == de.attribute(DataType::attribute_s));
     QString s = de.text();
-    BFNRETURN(s);
     return QVariant(s);
 }

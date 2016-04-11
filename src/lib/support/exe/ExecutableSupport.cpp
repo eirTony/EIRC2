@@ -1,12 +1,14 @@
 #include "ExecutableSupport.h"
 
 #include <QCoreApplication>
+#include <QString>
 
-#include <type/QQString.h>
+#include <base/_internal/ModuleManager.h>
+#include <base/TestObject.h>
 
 ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
                                      QObject * parent)
-    : QObject(parent)
+    : ModuleInfo(parent)
     , mApplicationClass(appClass)
 {
     switch (mApplicationClass)
@@ -24,12 +26,51 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
     default:
         break;
     }
+    TODO("move ModuleManager out of _internal");
+    WARNNOT(connect(this, SIGNAL(constructing()),
+                    ModuleManager::pointer(), SLOT(onConstruct())));
+    WARNNOT(connect(this, SIGNAL(executing()),
+                    ModuleManager::pointer(), SLOT(onExecute())));
+    WARNNOT(connect(this, SIGNAL(testing()),
+                    ModuleManager::pointer(), SLOT(onTest())));
+    WARNNOT(connect(this, SIGNAL(initializing()),
+                    ModuleManager::pointer(), SLOT(onInitialize())));
+    WARNNOT(connect(this, SIGNAL(testing()),
+                    ModuleManager::pointer(), SLOT(onTest())));
+    WARNNOT(connect(this, SIGNAL(configuring()),
+                    ModuleManager::pointer(), SLOT(onConfigure())));
+    WARNNOT(connect(this, SIGNAL(starting()),
+                    ModuleManager::pointer(), SLOT(onStart())));
+    WARNNOT(connect(this, SIGNAL(stoping()),
+                    ModuleManager::pointer(), SLOT(onStop())));
+    WARNNOT(connect(this, SIGNAL(quiting()),
+                    ModuleManager::pointer(), SLOT(onQuit())));
 
+    TRACE("emit constructing()","");
+    emit constructing();
 
     // Process Command Line
     mRawApplicationArguments = mpCoreApplication->arguments();
-    QQString exeArg = mRawApplicationArguments.takeFirst();
+    QString exeArg = mRawApplicationArguments.takeFirst();
     mExeFileInfo.setFile(exeArg);
+}
+
+bool ExecutableSupport::event(QEvent * event)
+{
+    NOUSE(event);
+    static bool first = true;
+    if (first)
+    {
+        TRACE("emit executing()", "");
+        emit executing();
+        first = false;
+    }
+    return false;
+}
+
+QCoreApplication * ExecutableSupport::app(void) const
+{
+    return mpCoreApplication;
 }
 
 const QFileInfo & ExecutableSupport::exeFileInfo(void) const
@@ -37,11 +78,29 @@ const QFileInfo & ExecutableSupport::exeFileInfo(void) const
     return mExeFileInfo;
 }
 
+QString ExecutableSupport::appName(void) const
+{
+    return app()->applicationName();
+}
+
+BasicName::VariantMap ExecutableSupport::initialization(void) const
+{
+    return mInitialization;
+}
+
+Configuration ExecutableSupport::configuration(void) const
+{
+    return mConfiguration;
+}
 
 void ExecutableSupport::initialize(void)
 {
-    connect(this, SIGNAL(quitApp()),
+    TRACE("emit initializing()", "");
+    TODO("Why TRACE macro ...args not working?");
+    emit initializing();
+    connect(this, SIGNAL(quiting()),
             mpCoreApplication, SLOT(quit()));
+    // TestObject::execAll();
 }
 
 void ExecutableSupport::setup(void)
@@ -51,10 +110,14 @@ void ExecutableSupport::setup(void)
 
 void ExecutableSupport::start(void)
 {
+    TRACE("emit starting()", "");
+    TODO("emit starting(void);");
     // do stuff
 }
 
 void ExecutableSupport::quit(void)
 {
-    emit quitApp();
+    TRACE("emit quitting()", "");
+    TODO("Why TRACE macro ...args not working?");
+    emit quiting();
 }

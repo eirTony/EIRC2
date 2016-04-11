@@ -8,5 +8,7 @@
 #else
 #  define WORKSHARED_EXPORT Q_DECL_IMPORT
 #endif
-
+#ifndef MODULE_NAME
+#  define MODULE_NAME "eirWork"
+#endif
 #endif // WORK_GLOBAL_H

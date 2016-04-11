@@ -2,8 +2,7 @@
  */
 #ifndef CoreLib_H
 #define CoreLib_H
-#define MODULE_NAME "eirCore"
-#include "Core_global.h"
+#include "core_global.h"
 
 #include <base/ModuleInfo.h>
 #include <core/Singleton.h>
@@ -11,21 +10,13 @@
 /*! @class CoreLib
  * @brief The CoreLib is the base class in the eirCore library.
  *
- * The CoreLib is an Core Eclipse library from which new
- * libraries can be based.
+ * The CoreLib is...
  *
  */
 class CORESHARED_EXPORT CoreLib : public ModuleInfo
 {
+    DECLARE_SINGLETON(CoreLib) // ctor & more
 public:
-    CoreLib(void);
-    //virtual void executeUnitTest(void);
 };
-
-/*! @typedef Core
- *
- * @brief Is the StaticSingleton instance of CoreLib
- */
-typedef StaticSingleton<CoreLib> Core;
 
 #endif // CoreLib_H
