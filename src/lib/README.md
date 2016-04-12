@@ -11,4 +11,4 @@ This directory contains subdirectories for each class of libraries:
 - third - Third-Party libraries 
 
 Copyright :copyright: 2007-2016, Eclipse Identity Recognition Corporation. All rights reserved.
-For more information consult `IP-RIGHT.md` in this directory.
+For more information consult `./IP-RIGHT.md`.
