@@ -1,2 +1,0 @@
-* IP-RIGHT.txt
-Detailed information regarding IP (Intellecutal Property) Rights for this project.
