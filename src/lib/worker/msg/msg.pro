@@ -20,7 +20,7 @@ SOURCES += MsgLib.cpp \
 
 HEADERS += MsgLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     msg_global.h \
     EclipseMessageQueue.h \
     EclipseMessage.h

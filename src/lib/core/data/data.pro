@@ -21,7 +21,7 @@ SOURCES += DataLib.cpp \
 
 HEADERS += DataLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     data_global.h \
     DataType.h \
     StringBehavior.h \

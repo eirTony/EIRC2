@@ -24,7 +24,7 @@ SOURCES += BjutLib.cpp \
 
 HEADERS += BjutLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     bjut_global.h \
     ModuleUnitTest.h \
     ClassUnitTest.h \

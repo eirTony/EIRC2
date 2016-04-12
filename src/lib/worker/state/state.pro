@@ -26,7 +26,7 @@ SOURCES += StateLib.cpp \
 
 HEADERS += StateLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     state_global.h \
     EclipseStateMachine.h \
     StateMachineConfiguration.h \
