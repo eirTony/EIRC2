@@ -12,7 +12,6 @@
 
 class BasicKeySegment;
 
-
 class BASESHARED_EXPORT BasicKey
 {
 public:
@@ -122,7 +121,7 @@ private:
     BasicId idS0s0 = BasicId("Super/0/sub/0");
 
     BasicKey current = BasicKey::newKey();
-    BasicKey keyNoId = BasicKey("""", current);
+    BasicKey keyNoId = BasicKey("", current);
     BasicKey keyS = BasicKey(idS, current);
     BasicKey keyS0 = BasicKey(idS0, current);
     BasicKey keyS0s = BasicKey(idS0s, current);

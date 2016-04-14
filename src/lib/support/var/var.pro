@@ -17,14 +17,11 @@ win32:RC_FILE = WinRes.rc
 
 LIBS *= -leirBase
 
-SOURCES += VarLib.cpp \
-#    VariableMap.cpp \
-#    VariablePack.cpp
+SOURCES += VarLib.cpp
 
 HEADERS += VarLib.h\
         var_global.h \
-#    VariableMap.h \
-#    VariablePack.h
+        VarLib.h
 
 unix {
     target.path = /usr/lib

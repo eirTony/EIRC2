@@ -17,7 +17,7 @@ SOURCES += WorkLib.cpp
 
 HEADERS += WorkLib.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../CommonVersion.h \
     work_global.h
 
 unix {
