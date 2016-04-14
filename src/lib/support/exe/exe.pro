@@ -29,7 +29,7 @@ SOURCES += ExeLib.cpp \
 HEADERS += ExeLib.h \
     Exe_global.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../CommonVersion.h \
     ConsoleApplication.h \
     ExecutableSupport.h \
     SerialExecutable.h \

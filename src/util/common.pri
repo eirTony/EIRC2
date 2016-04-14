@@ -4,5 +4,5 @@
 UTILDIR = ../..
 #message("UTILDIR=" $$UTILDIR)
 
-include (../common/common.pri)
+include (../common.pri)
 

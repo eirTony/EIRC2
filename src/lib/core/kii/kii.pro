@@ -43,7 +43,7 @@ SOURCES += KiiLib.cpp \
 
 HEADERS += KiiLib.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../CommonVersion.h \
     BaseNameIdBehavior.h \
     UniversalKey.h \
     kii_global.h \

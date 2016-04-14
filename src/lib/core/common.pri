@@ -7,7 +7,6 @@
 # Why are all these blank?
 
 CORELIBDIR = ..
-COMMONDIR = ../common
 
-include (../../common/common.pri)
+include (../common.pri)
 

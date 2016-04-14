@@ -2,9 +2,7 @@
  */
 #include "BaseLib.h"
 #include "Version.h"
-#include <BranchVersion.h>
 #include <CommonVersion.h>
-
 
 #include <QtDebug>
 
@@ -92,7 +90,7 @@ void BaseLib::doExecute(void)
 void BaseLib::doInitialize(void)
 {
     TRACE("We're %1", "there!");
-#ifdef BUILD_TESTS
+#ifdef BUILD_TEST
     BasicIdTest bit;
     BasicKeyTest bkt;
     BasicKeyManagerTest bkmt;

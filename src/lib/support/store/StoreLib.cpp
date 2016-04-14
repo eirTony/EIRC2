@@ -4,9 +4,7 @@
 #include "StoreLib.h"
 
 #include "Version.h"
-#include <BranchVersion.h>
 #include <CommonVersion.h>
-
 
 DEFINE_SINGLETON(StoreLib)
 const StoreLib * cgpStore = StoreLib::pointer();
