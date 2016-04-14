@@ -181,8 +181,6 @@ bool BasicKeyManager::load(const KeyIdPairList & list)
     return true;
 }
 
-
-#ifdef BUILD_BASICKEYMANAGERINSTANCE
 #ifdef BUILD_BASICKEYMANAGERINSTANCE
 DEFINE_BASICSINGLETON(BasicKeyManagerInstance)
 BasicKeyManagerInstance::BasicKeyManagerInstance(void) {;}

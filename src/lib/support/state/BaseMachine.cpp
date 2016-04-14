@@ -39,7 +39,7 @@ BaseMachine::BaseMachine(const BasicKeyManager::KeyIdPairList
     keys().load(cmStateKeyIdList);
     addUnconditionalTransitions();
     addStateSignalTransitions();
-    QTimer::singleShot(1, this, SLOT(initialize()));
+    QTimer::singleShot(10, this, SLOT(initialize()));
 }
 
 void BaseMachine::command(const Command cmd)
