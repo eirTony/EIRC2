@@ -5,12 +5,13 @@
 
 // todo: consider compare support e.g. EXPECTEQ
 
-#define TRACE(msg, args...) _FMTITEM(QtDebugMsg, TRACE_PFX, msg, args)
+#define TRACE(msg, args...) _FMTITEM(QtDebugMsg,   TRACE_PFX, msg, args)
 #if (QT_VERSION >= QT_VERSION_CHECK(5,5,0))
-#define INFO(msg, args...)  _FMTITEM(QtInfoMsg,  INFO_PFX,  msg, args)
+#define INFO(msg, args...)  _FMTITEM(QtInfoMsg,    INFO_PFX,  msg, args)
 #else
-#define INFO(msg, args...)  _FMTITEM(QtDebugMsg, INFO_PFX,  msg, args)
+#define INFO(msg, args...)  _FMTITEM(QtDebugMsg,   INFO_PFX,  msg, args)
 #endif
+#define WARN(msg, args...)  _FMTITEM(QtWarningMsg, WARN_PFX,  msg, args)
 
 #define TODO(msg)   __TODOITEM(QtDebugMsg,    TRACE_PFX DO_PFX,  #msg)
 #define NEEDDO(msg) __TODOITEM(QtWarningMsg,  WARN_PFX  DO_PFX,  #msg)

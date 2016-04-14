@@ -29,7 +29,7 @@ SOURCES += main.cpp \
 
 HEADERS += \
     ConsoleUno.h \
-    ../../../Common/CommonVersion.h \
+    ../../../CommonVersion.h \
     Version.h
 
 OTHER_FILES += \
