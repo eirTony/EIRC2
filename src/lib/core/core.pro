@@ -6,3 +6,4 @@ SUBDIRS += \
     data \
     kii \
     core \
+    boost

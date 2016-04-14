@@ -51,19 +51,21 @@ void BaseMachine::command(const Command cmd)
         break;
 
     case Start:
-        QTimer::singleShot(10, this, SLOT(initialize()));
+        QTimer::singleShot(10, this, SLOT(start()));
         break;
 
     case Stop:
-        QTimer::singleShot(10, this, SLOT(initialize()));
+        QTimer::singleShot(10, this, SLOT(stop()));
         break;
 
     case Terminate:
-        QTimer::singleShot(10, this, SLOT(initialize()));
+        QTimer::singleShot(10, this, SLOT(terminate()));
         break;
 
-    case nullCommand:   /* nada */  break;
-    case sizeCommand:   /* nada */  break;
+    case nullCommand:   // fall thru
+    case sizeCommand:
+        WARN("invalid command: %1", cmd);
+        break;
     }
 }
 
