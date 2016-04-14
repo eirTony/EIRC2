@@ -18,7 +18,7 @@ SOURCES += VarLib.cpp \
 
 HEADERS += VarLib.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     VariableMap.h \
     VariablePack.h
 

@@ -32,7 +32,7 @@ SOURCES += main.cpp \
 HEADERS += \
     AntzConsole.h \
     Version.h \
-    ../../../CommonVersion.h
+    ../../../Common/CommonVersion.h
 
 OTHER_FILES += \
     WinRes.rc \

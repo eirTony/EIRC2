@@ -3,5 +3,5 @@
 
 LIBDIR = ../..
 
-include (../common.pri)
+include (../common/common.pri)
 

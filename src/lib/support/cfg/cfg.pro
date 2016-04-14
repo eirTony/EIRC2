@@ -19,7 +19,7 @@ SOURCES += CfgLib.cpp \
 HEADERS += CfgLib.h \
     cfg_global.h \
     Version.h \
-    ../../../CommonVersion.h \
+    ../../../Common/CommonVersion.h \
     Configuration.h
 
 unix {
