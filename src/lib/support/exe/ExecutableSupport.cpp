@@ -115,7 +115,7 @@ QString ExecutableSupport::appName(void) const
     return app()->applicationName();
 }
 
-void ExecutableSupport::machineCommand(EclipseStateMachine::Command cmd)
+void ExecutableSupport::machineCommand(const BaseMachine::Command cmd)
 {
     mpMachine->command(cmd);
 }

@@ -1,5 +1,6 @@
 #ifndef BASEMACHINE_H
 #define BASEMACHINE_H
+#include "StateLib.h"
 
 #include <QStateMachine>
 
@@ -20,7 +21,7 @@
 class BaseState;
 class StateInterface;
 
-class BaseMachine : public QStateMachine
+class STATESHARED_EXPORT BaseMachine : public QStateMachine
 {
     Q_OBJECT
 public:

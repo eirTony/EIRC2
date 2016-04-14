@@ -40,10 +40,10 @@ public:
 public slots:
 
 protected slots:
-    void machineCommand(EclipseStateMachine::Command cmd);
+    void machineCommand(const BaseMachine::Command cmd);
 
 protected:
-    explicit ExecutableSupport(const ApplicationClass appClass,
+    ExecutableSupport(const ApplicationClass appClass,
                                  const BasicId::VariantMap &
                                     initialization,
                                  ExecutableSupport * parent=0);

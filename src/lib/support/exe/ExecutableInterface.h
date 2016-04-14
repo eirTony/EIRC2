@@ -1,9 +1,10 @@
 #ifndef EXECUTABLEINTERFACE_H
 #define EXECUTABLEINTERFACE_H
+#include "ExeLib.h"
 
 #include <base/BasicId.h>
 
-class ExecutableInterface
+class EXESHARED_EXPORT ExecutableInterface
 {
 public:
     ExecutableInterface(const BasicId::VariantMap  & initialization

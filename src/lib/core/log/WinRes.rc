@@ -1,5 +1,5 @@
 #include "Version.h"
 #include "../../../Common/BranchVersion.h"
-#include "../../../Common/CommonVersion.h"
+#include "../../../Common/Common/CommonVersion.h"
 
-#include "../../../common/CommonWinRes.rc"
+#include "../../../common/Common/CommonWinRes.rc"
