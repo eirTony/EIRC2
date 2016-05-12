@@ -18,7 +18,7 @@ SOURCES += ResLib.cpp \
 HEADERS += ResLib.h \
     res_global.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../common/CommonVersion.h \
     Result.h
 
 unix {

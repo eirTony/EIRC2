@@ -19,10 +19,10 @@ SOURCES += CoreLib.cpp
 
 HEADERS += CoreLib.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../common/CommonVersion.h \
     core_global.h \
     Singleton.h \
-    @hold/Singleton.h
+    _hold/Singleton.h
 
 unix {
     target.path = /usr/lib

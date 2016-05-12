@@ -22,7 +22,7 @@ SOURCES += WorkLib.cpp \
 
 HEADERS += WorkLib.h \
     Version.h \
-    ../../../Common/CommonVersion.h \
+    ../../../common/CommonVersion.h \
     work_global.h \
     EclipseWorkSupervisor.h \
     EclipseWorkMessageMachine.h
