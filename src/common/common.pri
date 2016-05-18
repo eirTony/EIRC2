@@ -1,5 +1,5 @@
-# file: ./src/common.pri
-#message("In ./src/common.pri")
+# file: ./src/common/common.pri
+#message("In ./src/common/common.pri")
 
 #SRCDIR = $$(PWD)
 #BASEDIR = $$dirname($$SRCDIR)
