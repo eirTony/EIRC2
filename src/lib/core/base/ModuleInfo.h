@@ -17,15 +17,17 @@ class ModuleManager;
  * @brief The ModuleInfo class manages the overall EIRC library collection.
  *
  */
-class BASESHARED_EXPORT ModuleInfo : public QObject
+class BASESHARED_EXPORT ModuleInfo
+        : public QObject
 {
     Q_OBJECT
 public:
-    ModuleInfo(void);
+//    ModuleInfo(void);
     ModuleInfo(const QString & name);
-    ModuleInfo(QObject * parent);
+    ModuleInfo(QObject * parent=0);
     bool isNull(void) const;
     void setVersion(void);
+    void setName(const QString & name);
     QString name(void) const;
     VersionInfo version(void) const;
     void initialize(void);

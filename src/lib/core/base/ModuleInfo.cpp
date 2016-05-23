@@ -19,7 +19,7 @@
  * that are available within the other libraries or applicaitons.
  */
 
-ModuleInfo::ModuleInfo(void) {;}
+//ModuleInfo::ModuleInfo(void) {;}
 
 /*! @fn ModuleInfo::ModuleInfo(const QString & name)
  *
@@ -33,12 +33,26 @@ ModuleInfo::ModuleInfo(const QString & name)
     : mName(name)
     , mpManager(ModuleManager::pointer())
 {
+    setObjectName("ModuleInfo");
     Q_ASSERT(mpManager);
     mpManager->muster(this);
 }
 
 ModuleInfo::ModuleInfo(QObject * parent)
-    : QObject(parent) {;}
+    : QObject(parent)
+    , mpManager(ModuleManager::pointer())
+{
+    setObjectName("ModuleInfo");
+    Q_ASSERT(mpManager);
+    mpManager->muster(this);
+}
+
+void ModuleInfo::setName(const QString & name)
+{
+    Q_ASSERT(mpManager);
+    mName = name;
+    mpManager->muster(this);
+}
 
 
 bool ModuleInfo::isNull(void) const

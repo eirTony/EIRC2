@@ -6,10 +6,13 @@
 #include "ExecutableInitialization.h"
 #include "StandardStream.h"
 
-ConsoleApplication::ConsoleApplication(const ExecutableInitialization &
+ConsoleApplication::ConsoleApplication(ExecutableInitialization
                                             initialization)
     : SerialExecutable(new StandardStream,
-                       initialization) {;}
+                       initialization)
+{
+    setObjectName("ConsoleApplication");
+}
 
 ConsoleApplication::~ConsoleApplication()
 {

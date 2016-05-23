@@ -2,5 +2,6 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
 #    ConsoleUno \
-    HelloCloudConsole \
-    HelloCloudMachine
+#    HelloCloudConsole \
+#    HelloCloudMachine \
+    REPOcon

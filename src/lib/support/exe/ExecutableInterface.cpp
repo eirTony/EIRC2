@@ -1,10 +1,10 @@
 #include "ExecutableInterface.h"
 
 ExecutableInterface::ExecutableInterface(
-        const BasicId::VariantMap  & Initialization)
+        const ExecutableInitialization  & Initialization)
     : mInitialization(Initialization)
 {
-
+    setObjectName("ExecutableInterface");
 }
 
 // protected virtual

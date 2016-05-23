@@ -9,14 +9,17 @@
 
 // protected
 ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
-                                     const BasicId::VariantMap & initialization,
+                                     ExecutableInitialization & initialization,
                                      ExecutableSupport * parent)
-    : ModuleInfo(parent)
-    , ExecutableInterface(initialization)
+    : ExecutableInterface(initialization)
     , mApplicationClass(appClass)
 //    , mpMachine(new EclipseStateMachine(this))
 {
+    setObjectName("ExecutableSupport");
     setMother(parent);
+    setMother(this);
+    initialization.initialize();
+
     mpMachine = new EclipseStateMachine(this);
 
     switch (mApplicationClass)
@@ -31,6 +34,7 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
         mExeFileInfo.setFile(mRawApplicationArguments.first());
         if ( ! QObject::parent())
             QObject::setParent(mpCoreApplication);
+        ModuleInfo::setName(mExeFileInfo.fileName());
         break;
 
     case nullApplicationClass:  /* nada */  break;
@@ -48,11 +52,12 @@ ExecutableSupport::ExecutableSupport(const ApplicationClass appClass,
 // protected
 void ExecutableSupport::setMother(const ExecutableSupport * pMother)
 {
-    const ExecutableSupport * pXSup
-            = qobject_cast<const ExecutableSupport *>(pMother);
-    if (pXSup) mpMotherExeObject = pXSup;
 }
 
+ExecutableInitialization ExecutableSupport::vars(void) const
+{
+    return mVars;
+}
 
 // private
 void ExecutableSupport::setupConnections(void)

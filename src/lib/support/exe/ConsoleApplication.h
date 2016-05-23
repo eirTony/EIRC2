@@ -16,9 +16,9 @@ class EXESHARED_EXPORT ConsoleApplication
 {
     Q_OBJECT
 public:
-    explicit ConsoleApplication(const ExecutableInitialization &
-                                            initialization
-                                            =ExecutableInitialization());
+    explicit ConsoleApplication(ExecutableInitialization
+                                    initialization
+                                    =ExecutableInitialization());
     ~ConsoleApplication();
 
 signals:

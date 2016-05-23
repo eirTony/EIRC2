@@ -1,16 +1,19 @@
 #include "SerialExecutable.h"
 
+#include <base/Diagnostic.h>
+
 #include "BaseSerialStream.h"
 
 SerialExecutable::SerialExecutable(BaseSerialStream *
                                         serialStream,
-                                   const BasicId::VariantMap
-                                        initialization)
+                                   ExecutableInitialization
+                                        & initialization)
     : ExecutableSupport(ExecutableSupport::Serial,
                         initialization,
                         this)
     , mpSerialStream(serialStream)
 {
+    setObjectName("SerialExecutable");
 }
 
 void SerialExecutable::setStream(BaseSerialStream * textStream)
@@ -30,6 +33,7 @@ QString SerialExecutable::readLine(void)
 
 bool SerialExecutable::writeLine(const QString & line)
 {
+    TRACE("SerialExecutable::writeLine(%1)", line);
     return mpSerialStream ? mpSerialStream->writeLine(line) : false;
 }
 

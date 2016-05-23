@@ -9,7 +9,10 @@ class EXESHARED_EXPORT ExecutableInitialization
 {
 public:
     ExecutableInitialization(void);
-    BasicId::VariantMap initVarMap(void) const;
+    ExecutableInitialization(const BasicId::VariantMap & other);
+    virtual void initialize(void);
+    BasicId::VariantMap vars(void) const;
+    BasicId::VariantMap operator & (void) const;
 };
 
 #endif // EXECUTABLEINITIALIZATION_H

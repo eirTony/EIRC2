@@ -19,8 +19,8 @@ public:
 
 protected:
     explicit SerialExecutable(BaseSerialStream * serialStream,
-                              const BasicId::VariantMap
-                                    initialization);
+                              ExecutableInitialization
+                                    & initialization);
 
 private:
     BaseSerialStream * mpSerialStream = 0;

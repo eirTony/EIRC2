@@ -2,13 +2,20 @@
 #define EXECUTABLEINTERFACE_H
 #include "ExeLib.h"
 
+#include <QObject>
+
 #include <base/BasicId.h>
 
+#include "ExecutableInitialization.h"
+
 class EXESHARED_EXPORT ExecutableInterface
+        : public ModuleInfo
 {
+    Q_OBJECT
 public:
-    ExecutableInterface(const BasicId::VariantMap  & initialization
-                                =BasicId::VariantMap());
+    ExecutableInterface(const ExecutableInitialization
+                        & initialization
+                        =ExecutableInitialization());
 
 protected: // virtual
     virtual void doConstruct(void);
@@ -20,9 +27,9 @@ protected: // virtual
     virtual void doDestruct(void);
 
 protected slots:
-    void initialize(void);
-    void gyse(void);
-    void quit(void);
+    void initialize(void) {;}
+    void gyse(void) {;}
+    void quit(void) {;}
 
 protected:
     BasicId::VariantMap  initialization(void) const;

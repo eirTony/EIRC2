@@ -3,9 +3,11 @@
 #include <QTimer>
 
 #include <base/Diagnostic.h>
+#include <exe/ExecutableInitialization.h>
 #include <work/EclipseWorkMessageMachine.h>
 
 HelloCloudConsole::HelloCloudConsole(void)
+//    : ConsoleApplication(ExecutableInitialization())
 //    : cmpMachine(new EclipseWorkMessageMachine(this))
 {
     setVersion();
@@ -13,8 +15,10 @@ HelloCloudConsole::HelloCloudConsole(void)
     INFO("HelloCloudConsole %1 started",
          ModuleInfo::version().toString(true));
     QObject::setObjectName("HelloCloudConsole");
+#if false
     WARNNOT(connect(app(), &QCoreApplication::aboutToQuit,
                     this, &HelloCloudConsole::quitting));
+#endif
 }
 
 void HelloCloudConsole::doInitialize(void)

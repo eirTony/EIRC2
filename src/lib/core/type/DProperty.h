@@ -62,7 +62,7 @@ void LogItem::dtor(void) {}
         void set##NAME(const TYPE v)        { if (data) data->set##NAME(v);    } \
         TYPE get##NAME(void) const          { return (data) ? data->get##NAME() : DFLT; } \
         TYPE * ptr##NAME(void)              { return (data) ? data->ptr##NAME() : 0; } \
-        const TYPE * ptr##NAME(void) const  { return (data) ? data->ptr##NAME() : 0; } \
+        const TYPE * cptr##NAME(void) const  { return (data) ? data->ptr##NAME() : 0; } \
 
 /*
         TYPE & ref##NAME(void)              { return (data) ? data->ref##NAME() : 0; } \
@@ -76,7 +76,7 @@ void LogItem::dtor(void) {}
         void set##NAME(const TYPE v)        { TYPE##_##NAME = v;    } \
         TYPE get##NAME(void) const          { return TYPE##_##NAME; } \
         TYPE * ptr##NAME(void)              { return & TYPE##_##NAME; } \
-        const TYPE * ptr##NAME(void) const  { return & TYPE##_##NAME; } \
+        const TYPE * cptr##NAME(void) const  { return & TYPE##_##NAME; } \
 
 /*
         TYPE & ref##NAME(void)              { return & TYPE##_##NAME; } \

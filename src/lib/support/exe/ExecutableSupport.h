@@ -16,8 +16,10 @@ class QCoreApplication;
 #include <res/Result.h>
 #include <state/EclipseStateMachine.h>
 
+#include "ExecutableInitialization.h"
+
 class EXESHARED_EXPORT ExecutableSupport
-        : public ModuleInfo, protected ExecutableInterface
+        : public ExecutableInterface
 {
     Q_OBJECT
 
@@ -44,10 +46,10 @@ protected slots:
 
 protected:
     ExecutableSupport(const ApplicationClass appClass,
-                                 const BasicId::VariantMap &
-                                    initialization,
+                                 ExecutableInitialization & initialization,
                                  ExecutableSupport * parent=0);
     void setMother(const ExecutableSupport * pMother);
+    ExecutableInitialization vars(void) const;
     virtual bool event(QEvent * event);
     void initialize(void);
 
@@ -76,6 +78,7 @@ private:
     QStringList mRawApplicationArguments;
     QFileInfo mExeFileInfo;
     const ExecutableSupport * mpMotherExeObject = 0;
+    const ExecutableInitialization mVars;
 };
 
 #endif // EXECUTABLESUPPORT_H
