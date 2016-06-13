@@ -3,5 +3,6 @@
 StatusBar::StatusBar(QWidget *parent)
     : QStatusBar(parent)
 {
+    setObjectName("StatusBar");
     showMessage("OK");
 }

@@ -4,6 +4,7 @@
 #include <QWidget>
 
 #include <QList>
+#include <QMap>
 #include <QIcon>
 #include <QPair>
 class QString;
@@ -22,12 +23,15 @@ public:
                  const QIcon & icon=QIcon());
 
 signals:
+    void addedPage(QString,QIcon);
 
 public slots:
+    void selectPage(const QString & label);
 
 private:
     QTabWidget * mpCentralTabs = 0;
     QList<LabelPageEntry> mPageEntryList;
+    QMap<QString, QWidget *> mLabelPageMap;
 };
 
 #endif // CENTRALWIDGET_H

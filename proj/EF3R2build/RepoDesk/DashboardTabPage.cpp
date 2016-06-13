@@ -3,4 +3,5 @@
 DashboardTabPage::DashboardTabPage(QWidget * parent)
     : QWidget(parent)
 {
+    setObjectName("DashboardTabPage");
 }

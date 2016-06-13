@@ -1,8 +1,10 @@
 #include "MainWindow.h"
 
+#include <QApplication>
 #include <QTimer>
 
 #include "MenuBar.h"
+#include "ViewMenu.h"
 #include "MiscActions.h"
 #include "CentralWidget.h"
 #include "StatusBar.h"
@@ -13,17 +15,29 @@ MainWindow * MainWindow::smpThis = 0;
 MainWindow::MainWindow(QWidget * parent)
     : QMainWindow(parent)
     , mpMiscActions(new MiscActions(this))
+    , mpSettings(new Settings("EclipseIR","RepoDesk",this))
 {
-    smpThis = this;
+    setObjectName("MainWindow");
     QTimer::singleShot(10, this, SLOT(setup()));
 }
 
 MainWindow::~MainWindow() {;}
 
 // static
-const MainWindow * MainWindow::pointer(void)
+MainWindow * MainWindow::pointer(void)
 {
+    if ( ! smpThis) smpThis = new MainWindow(0);
     return smpThis;
+}
+
+MenuBar * MainWindow::menu(void) const
+{
+    return mpMenuBar;
+}
+
+Settings & MainWindow::settings(void) const
+{
+    return &mpSettings;
 }
 
 QAction * MainWindow::quitAction(void) const

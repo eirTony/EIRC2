@@ -22,7 +22,11 @@ SOURCES += main.cpp\
     CentralWidget.cpp \
     DashboardTabPage.cpp \
     StatusBar.cpp \
-    StatusPage.cpp
+    StatusPage.cpp \
+    Dashboard/DashboardFilesWidget.cpp \
+    ViewMenu.cpp \
+    Dashboard/Settings.cpp \
+    Dashboard/DirWidget.cpp
 
 HEADERS  += MainWindow.h \
         MiscActions.h \
@@ -31,4 +35,8 @@ HEADERS  += MainWindow.h \
     CentralWidget.h \
     DashboardTabPage.h \
     StatusBar.h \
-    StatusPage.h
+    StatusPage.h \
+    Dashboard/DashboardFilesWidget.h \
+    ViewMenu.h \
+    Dashboard/Settings.h \
+    Dashboard/DirWidget.h

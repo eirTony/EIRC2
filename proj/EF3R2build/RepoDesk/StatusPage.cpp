@@ -5,6 +5,8 @@
 StatusPage::StatusPage(QWidget * parent)
     : QPlainTextEdit(parent)
 {
+    setObjectName("StatusPage");
+
     int minWidth = tabStopWidth() * 10;
 
     setReadOnly(true);

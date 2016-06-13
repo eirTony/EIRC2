@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 class MenuBar;
+class Settings;
 class MiscActions;
 class CentralWidget;
 class StatusBar;
@@ -16,7 +17,9 @@ public:
     MainWindow(QWidget * parent=0);
     ~MainWindow();
 
-    static const MainWindow * pointer(void);
+    static MainWindow * pointer(void);
+    MenuBar * menu(void) const;
+    Settings & settings(void) const;
     QAction * quitAction(void) const;
 
 public slots:
@@ -24,8 +27,10 @@ public slots:
 
 private:
     static MainWindow * smpThis;
-    MenuBar * mpMenuBar = 0;
     MiscActions * mpMiscActions = 0;
+    Settings * mpSettings = 0;
+
+    MenuBar * mpMenuBar = 0;
     CentralWidget * mpCentralWidget = 0;
     StatusBar * mpStatusBar = 0;
 };
