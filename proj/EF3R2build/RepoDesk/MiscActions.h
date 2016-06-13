@@ -15,7 +15,6 @@ public:
 signals:
 
 public slots:
-    void setup(void);
 
 private:
     QAction * cmpQuitAction = 0;

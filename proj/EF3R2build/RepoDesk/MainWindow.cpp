@@ -4,13 +4,14 @@
 
 #include "MenuBar.h"
 #include "MiscActions.h"
+#include "CentralWidget.h"
+#include "StatusBar.h"
 
 // static
 MainWindow * MainWindow::smpThis = 0;
 
 MainWindow::MainWindow(QWidget * parent)
     : QMainWindow(parent)
-    , mpMenuBar(new MenuBar(this))
     , mpMiscActions(new MiscActions(this))
 {
     smpThis = this;
@@ -32,7 +33,11 @@ QAction * MainWindow::quitAction(void) const
 
 void MainWindow::setup(void)
 {
-    mpMiscActions->setup();
-    mpMenuBar->setup();
+    mpMenuBar = new MenuBar(this);
+    mpCentralWidget = new CentralWidget(this);
+    mpStatusBar = new StatusBar(this);
+
+    setCentralWidget(mpCentralWidget);
     setMenuBar(mpMenuBar);
+    setStatusBar(mpStatusBar);
 }

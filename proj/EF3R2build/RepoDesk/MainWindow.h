@@ -5,6 +5,8 @@
 
 class MenuBar;
 class MiscActions;
+class CentralWidget;
+class StatusBar;
 
 class MainWindow : public QMainWindow
 {
@@ -24,6 +26,8 @@ private:
     static MainWindow * smpThis;
     MenuBar * mpMenuBar = 0;
     MiscActions * mpMiscActions = 0;
+    CentralWidget * mpCentralWidget = 0;
+    StatusBar * mpStatusBar = 0;
 };
 
 

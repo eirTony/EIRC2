@@ -14,7 +14,6 @@ public:
 signals:
 
 public slots:
-    void setup(void);
 
 private:
     RepositoryMenu * cmpRepositoryMenu = 0;

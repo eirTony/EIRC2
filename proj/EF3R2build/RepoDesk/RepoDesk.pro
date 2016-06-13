@@ -18,9 +18,17 @@ SOURCES += main.cpp\
         MainWindow.cpp \
         MiscActions.cpp \
         MenuBar.cpp \
-    RepositoryMenu.cpp
+    RepositoryMenu.cpp \
+    CentralWidget.cpp \
+    DashboardTabPage.cpp \
+    StatusBar.cpp \
+    StatusPage.cpp
 
 HEADERS  += MainWindow.h \
         MiscActions.h \
         MenuBar.h \
-    RepositoryMenu.h
+    RepositoryMenu.h \
+    CentralWidget.h \
+    DashboardTabPage.h \
+    StatusBar.h \
+    StatusPage.h
