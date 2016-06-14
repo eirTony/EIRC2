@@ -24,6 +24,7 @@ CentralWidget::CentralWidget(QWidget * parent)
 
     addPage(new DashboardTabPage(this), "Dashboard");
     addPage(new StatusPage(this), "Status");
+    show();
 }
 
 void CentralWidget::addPage(QWidget * page,

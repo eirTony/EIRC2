@@ -25,8 +25,8 @@ SOURCES += main.cpp\
     StatusPage.cpp \
     Dashboard/DashboardFilesWidget.cpp \
     ViewMenu.cpp \
-    Dashboard/Settings.cpp \
-    Dashboard/DirWidget.cpp
+    Settings.cpp \
+    DirWidget.cpp
 
 HEADERS  += MainWindow.h \
         MiscActions.h \
@@ -38,5 +38,5 @@ HEADERS  += MainWindow.h \
     StatusPage.h \
     Dashboard/DashboardFilesWidget.h \
     ViewMenu.h \
-    Dashboard/Settings.h \
-    Dashboard/DirWidget.h
+    Settings.h \
+    DirWidget.h

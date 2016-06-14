@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
 #include <QApplication>
+#include <QSettings>
 #include <QTimer>
 
 #include "MenuBar.h"
@@ -8,6 +9,7 @@
 #include "MiscActions.h"
 #include "CentralWidget.h"
 #include "StatusBar.h"
+#include "Settings.h"
 
 // static
 MainWindow * MainWindow::smpThis = 0;
@@ -35,9 +37,9 @@ MenuBar * MainWindow::menu(void) const
     return mpMenuBar;
 }
 
-Settings & MainWindow::settings(void) const
+Settings * MainWindow::settings(void) const
 {
-    return &mpSettings;
+    return mpSettings;
 }
 
 QAction * MainWindow::quitAction(void) const

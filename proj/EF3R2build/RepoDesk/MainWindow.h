@@ -19,7 +19,7 @@ public:
 
     static MainWindow * pointer(void);
     MenuBar * menu(void) const;
-    Settings & settings(void) const;
+    Settings * settings(void) const;
     QAction * quitAction(void) const;
 
 public slots:
